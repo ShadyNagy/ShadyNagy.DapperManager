@@ -64,7 +64,7 @@ namespace ShadyNagy.DapperInMemory
 
         public override int ExecuteNonQuery()
         {
-            throw new NotImplementedException();
+            return inner.ExecuteNonQuery();
         }
 
         public override object ExecuteScalar()

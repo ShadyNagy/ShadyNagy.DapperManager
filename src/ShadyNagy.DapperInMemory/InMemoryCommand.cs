@@ -58,7 +58,21 @@ namespace ShadyNagy.DapperInMemory
 
         public int ExecuteNonQuery()
         {
-            throw new NotImplementedException();
+            if (CommandType == CommandType.Text)
+            {
+                if (GetSqlCommandType() == SqlSyntexType.Nothing)
+                {
+                    return 0;
+                }
+                else if (GetSqlCommandType() == SqlSyntexType.Select)
+                {
+                    return 0;
+                }
+                else if (GetSqlCommandType() == SqlSyntexType.Insert)
+                {
+                    return ExcuteInsert();
+                }
+            }
         }
 
         public IDataReader? ExecuteReader()
@@ -139,6 +153,39 @@ namespace ShadyNagy.DapperInMemory
             return parts[3];
         }
 
+        private string GetInsertTableName()
+        {
+            var parts = GetCommandTextParts();
+            if (parts.Length <= 2)
+            {
+                return string.Empty;
+            }
+
+            return parts[2];
+        }
+
+        private string[] GetInsertColumns()
+        {
+            var parts = GetCommandTextParts();
+            if (parts.Length <= 2)
+            {
+                return string.Empty;
+            }
+
+            return parts[2];
+        }
+
+        private string[] GetInsertValues()
+        {
+            var parts = GetCommandTextParts();
+            if (parts.Length <= 2)
+            {
+                return string.Empty;
+            }
+
+            return parts[2];
+        }
+
         private IDataReader? ExcuteSelect()
         {
             var tableName = GetSelectTableName();
@@ -149,5 +196,21 @@ namespace ShadyNagy.DapperInMemory
             }
             return _currentDataSet.CreateDataReader();
         }
+
+        private int ExcuteInsert()
+        {
+            var tableName = GetInsertTableName();
+
+            if (!_currentDataSet.Tables.Contains(tableName))
+            {
+                return 0;
+            }
+            return _currentDataSet.CreateDataReader();
+        }
     }
 }
+
+INSERT INTO table
+(column1, column2, ... column_n )
+VALUES
+(expression1, expression2, ... expression_n);
