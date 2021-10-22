@@ -15,20 +15,20 @@ namespace ShadyNagy.DapperInMemory
 
         public override string CommandText
         {
-            get => throw new NotImplementedException();
+            get => inner.CommandText;
             set => inner.CommandText = value;
         }
 
         public override int CommandTimeout
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => inner.CommandTimeout;
+            set => inner.CommandTimeout = value;
         }
 
         public override CommandType CommandType
         {
-            get => throw new NotImplementedException();
-            set => throw new NotImplementedException();
+            get => inner.CommandType;
+            set => inner.CommandType = value;
         }
 
         public override bool DesignTimeVisible

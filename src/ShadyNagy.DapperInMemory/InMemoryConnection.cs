@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 
 namespace ShadyNagy.DapperInMemory
 {
@@ -16,8 +17,7 @@ namespace ShadyNagy.DapperInMemory
         {
             _connectionString = connectionString;
 
-            // get databse name from connection string;
-            _databaseName = _connectionString;
+            _databaseName = GetDatabaseName(_connectionString);
             AddNewDatabase(_databaseName);
         }
 
@@ -73,6 +73,27 @@ namespace ShadyNagy.DapperInMemory
         private void AddNewDatabase(string databaseName)
         {
             dataSets.Add(databaseName, new DataSet());
+        }
+
+        private string GetDatabaseName(string connectionString)
+        {
+            if (string.IsNullOrEmpty(connectionString))
+            {
+                return string.Empty;
+            }
+            var mainParts = connectionString.Split(";");
+            if (mainParts.Length <= 0)
+            {
+                return string.Empty;
+            }
+
+            var databasePart = mainParts.FirstOrDefault(x => x.ToLower().Contains("database"))?.Split("=");
+            if (databasePart == null || databasePart.Length <= 1)
+            {
+                return string.Empty;
+            }
+
+            return databasePart[1];
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ShadyNagy.DapperManager.Interfaces;
 using ShadyNagy.DapperManager.Oracle;
+using ShadyNagy.DapperManager.Tests.Constants;
 
 namespace ShadyNagy.DapperManager.Tests.Helpers
 {
@@ -16,11 +17,11 @@ namespace ShadyNagy.DapperManager.Tests.Helpers
         public DiHelper()
         {
             var services = new ServiceCollection();
-            services.AddScoped<ISqlConnectionFactory, OracleConnectionFactory>();
+            services.AddScoped<ISqlConnectionFactory>(sp => new InMemoryConnectionFactory(DatabaseConstants.CONNECTION_STRING));            
             services.AddScoped<ISyntexBuilder, OracleSyntexBuilder>();
             services.AddScoped<IDapperService, OracleDapperService>();
 
-            ServiceProvider = services.BuildServiceProvider();
+            ServiceProvider = services.AddLogging().BuildServiceProvider();
         }
 
         public T GetService<T>()
