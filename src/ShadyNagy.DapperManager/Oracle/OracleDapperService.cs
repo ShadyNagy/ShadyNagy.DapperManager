@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Microsoft.Extensions.Logging;
 using ShadyNagy.DapperManager.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,11 +13,13 @@ namespace ShadyNagy.DapperManager.Oracle
     {
         private readonly ISqlConnectionFactory _sqlConnectionFactory;
         private readonly ISyntexBuilder _oracleSyntexBuilder;
+        private ILogger<OracleDapperService> _logger { get; }
 
-        public OracleDapperService(ISqlConnectionFactory sqlConnectionFactory, ISyntexBuilder oracleSyntexBuilder)
+        public OracleDapperService(ISqlConnectionFactory sqlConnectionFactory, ISyntexBuilder oracleSyntexBuilder, ILogger<OracleDapperService> logger)
         {
             _sqlConnectionFactory = sqlConnectionFactory;
             _oracleSyntexBuilder = oracleSyntexBuilder;
+            _logger = logger;
             _oracleSyntexBuilder.Reset();
         }
 
@@ -28,8 +31,9 @@ namespace ShadyNagy.DapperManager.Oracle
 
                 return (await connection.QueryAsync<T>(_oracleSyntexBuilder.SelectAllFrom(name).Build(), commandType: CommandType.Text)).ToList();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                _logger.LogError(exception.Message);
                 return null;
             }
         }
@@ -44,8 +48,9 @@ namespace ShadyNagy.DapperManager.Oracle
 
                 return (await connection.QueryAsync<T>(oracleSyntexBuilder.SelectColumnsFrom(name, columnsNames).Build(), commandType: CommandType.Text)).ToList();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                _logger.LogError(exception.Message);
                 return null;
             }
         }
@@ -58,8 +63,9 @@ namespace ShadyNagy.DapperManager.Oracle
 
                 return connection.Query<T>(_oracleSyntexBuilder.SelectAllFrom(name).Build(), commandType: CommandType.Text).ToList();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                _logger.LogError(exception.Message);
                 return null;
             }
         }
@@ -74,8 +80,9 @@ namespace ShadyNagy.DapperManager.Oracle
 
                 return connection.Query<T>(oracleSyntexBuilder.SelectColumnsFrom(name, columnsNames).Build(), commandType: CommandType.Text).ToList();
             }
-            catch (Exception)
+            catch (Exception exception)
             {
+                _logger.LogError(exception.Message);
                 return null;
             }
         }
