@@ -19,6 +19,7 @@ namespace ShadyNagy.DapperInMemory
             set
             {
                 inner.CommandText = value
+                .TrimEnd(';')
                 .Replace("\r\n", " ")
                 .Replace("\r", " ")
                 .Replace("\n", " ");

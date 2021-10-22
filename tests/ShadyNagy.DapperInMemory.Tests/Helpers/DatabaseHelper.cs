@@ -26,5 +26,21 @@ NAME VARCHAR2 NULL
 
             connection.Close();           
         }
+
+        public static async Task InsertTestRowAsync()
+        {
+            var connection = new InMemoryConnection(DatabaseConstants.CONNECTION_STRING);
+            connection.Open();
+
+            var sql = @"
+INSERT INTO EMPLOYEES
+(ID, NAME)
+VALUES
+(1, 'Shady');
+";
+            var affectedCount = await connection.ExecuteAsync(sql, commandType: CommandType.Text);
+
+            connection.Close();
+        }
     }
 }

@@ -7,12 +7,10 @@ namespace ShadyNagy.DapperInMemory
 {
     internal class InMemoryCommand : IDbCommand
     {
-        private readonly Dictionary<string, DataSet> _dataSets;
         private DataSet _currentDataSet = new DataSet();
 
         public InMemoryCommand(Dictionary<string, DataSet> dataSets)
-        {
-            _dataSets = dataSets;
+        {     
             _currentDataSet = dataSets.LastOrDefault().Value;
         }
 
@@ -93,7 +91,7 @@ namespace ShadyNagy.DapperInMemory
                     return ExcuteSelect();
                 }
             }
-            return _currentDataSet.CreateDataReader();
+            return null;
         }
 
         public IDataReader ExecuteReader(CommandBehavior behavior)
@@ -294,7 +292,9 @@ namespace ShadyNagy.DapperInMemory
             {
                 return null;
             }
-            return _currentDataSet.CreateDataReader();
+
+            var table = _currentDataSet.Tables[tableName];
+            return table.CreateDataReader();
         }
 
         private int ExcuteInsert()
@@ -322,9 +322,10 @@ namespace ShadyNagy.DapperInMemory
             DataRow row = table.NewRow();
             for (var i = 0; i < columns.Length; i++)
             {
-                row[columns[i]] = values[i];
-                addedRows++;
+                row[columns[i]] = values[i];                
             }
+            table.Rows.Add(row);
+            addedRows++;
 
             return addedRows;
         }

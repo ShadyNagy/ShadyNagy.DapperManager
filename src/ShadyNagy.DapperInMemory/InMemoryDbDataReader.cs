@@ -14,63 +14,63 @@ namespace ShadyNagy.DapperInMemory
             this.dataReader = dataReader;
         }
 
-        public override int Depth => throw new NotImplementedException();
+        public override int Depth => dataReader.Depth;
 
         public override int FieldCount => dataReader.FieldCount;
 
-        public override bool HasRows => throw new NotImplementedException();
+        public override bool HasRows => dataReader.Read();
 
-        public override bool IsClosed => throw new NotImplementedException();
+        public override bool IsClosed => dataReader.IsClosed;
 
-        public override int RecordsAffected => throw new NotImplementedException();
+        public override int RecordsAffected => dataReader.RecordsAffected;
 
         public override object this[int ordinal] => dataReader[ordinal];
 
-        public override object this[string name] => throw new NotImplementedException();
+        public override object this[string name] => dataReader[name];
 
         public override bool GetBoolean(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetBoolean(ordinal);
         }
 
         public override byte GetByte(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetByte(ordinal);
         }
 
         public override long GetBytes(int ordinal, long dataOffset, byte[] buffer, int bufferOffset, int length)
         {
-            throw new NotImplementedException();
+            return dataReader.GetBytes(ordinal, dataOffset, buffer, bufferOffset, length);
         }
 
         public override char GetChar(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetChar(ordinal);
         }
 
         public override long GetChars(int ordinal, long dataOffset, char[] buffer, int bufferOffset, int length)
         {
-            throw new NotImplementedException();
+            return dataReader.GetChars(ordinal, dataOffset, buffer, bufferOffset, length);
         }
 
         public override string GetDataTypeName(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetDataTypeName(ordinal);
         }
 
         public override DateTime GetDateTime(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetDateTime(ordinal);
         }
 
         public override decimal GetDecimal(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetDecimal(ordinal);
         }
 
         public override double GetDouble(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetDouble(ordinal);
         }
 
         public override IEnumerator GetEnumerator()
@@ -85,27 +85,27 @@ namespace ShadyNagy.DapperInMemory
 
         public override float GetFloat(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetFloat(ordinal);
         }
 
         public override Guid GetGuid(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetGuid(ordinal);
         }
 
         public override short GetInt16(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetInt16(ordinal);
         }
 
         public override int GetInt32(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetInt32(ordinal);
         }
 
         public override long GetInt64(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetInt64(ordinal);
         }
 
         public override string GetName(int ordinal)
@@ -115,27 +115,27 @@ namespace ShadyNagy.DapperInMemory
 
         public override int GetOrdinal(string name)
         {
-            throw new NotImplementedException();
+            return dataReader.GetOrdinal(name);
         }
 
         public override string GetString(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetString(ordinal);
         }
 
         public override object GetValue(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.GetValue(ordinal);
         }
 
         public override int GetValues(object[] values)
         {
-            throw new NotImplementedException();
+            return dataReader.GetValues(values);
         }
 
         public override bool IsDBNull(int ordinal)
         {
-            throw new NotImplementedException();
+            return dataReader.IsDBNull(ordinal);
         }
 
         public override bool NextResult()
