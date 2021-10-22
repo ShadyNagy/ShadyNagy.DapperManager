@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EE6DAA80
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShadyNagy.DapperManager", "src\ShadyNagy.DapperManager\ShadyNagy.DapperManager.csproj", "{E908228A-D313-463F-8889-1EC5789DE4D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShadyNagy.DapperManager.Tests", "tests\ShadyNagy.DapperManager.Tests\ShadyNagy.DapperManager.Tests.csproj", "{E9699B0D-6537-483A-84DC-2DA48E8014E0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,12 +21,17 @@ Global
 		{E908228A-D313-463F-8889-1EC5789DE4D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E908228A-D313-463F-8889-1EC5789DE4D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E908228A-D313-463F-8889-1EC5789DE4D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9699B0D-6537-483A-84DC-2DA48E8014E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9699B0D-6537-483A-84DC-2DA48E8014E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9699B0D-6537-483A-84DC-2DA48E8014E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9699B0D-6537-483A-84DC-2DA48E8014E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E908228A-D313-463F-8889-1EC5789DE4D8} = {1B06445C-A4B0-4880-8CBB-BD5E60363791}
+		{E9699B0D-6537-483A-84DC-2DA48E8014E0} = {EE6DAA80-18CC-4E09-B823-0CB4E92DE3BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {458E8E0F-0BE6-4CCE-AB95-51C34B1D3785}

@@ -40,7 +40,7 @@ namespace ShadyNagy.DapperManager.Oracle
 
         public ISyntexBuilder All()
         {
-            Syntex = new StringBuilder($"{ALL} ");
+            Syntex = Syntex.Append($"{ALL} ");
 
             return this;
         }
@@ -55,7 +55,7 @@ namespace ShadyNagy.DapperManager.Oracle
         public ISyntexBuilder Select(List<string> columnsNames)
         {
             Syntex = new StringBuilder($"{SELECT} ");
-            Syntex.Append(string.Join(" ", columnsNames.ToArray()));
+            Syntex.Append(string.Join(",", columnsNames.ToArray()));
             Syntex.Append(" ");
 
             return this;
