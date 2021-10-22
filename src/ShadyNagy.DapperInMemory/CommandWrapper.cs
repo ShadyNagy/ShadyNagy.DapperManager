@@ -16,7 +16,18 @@ namespace ShadyNagy.DapperInMemory
         public override string CommandText
         {
             get => inner.CommandText;
-            set => inner.CommandText = value;
+            set
+            {
+                inner.CommandText = value
+                .Replace("\r\n", " ")
+                .Replace("\r", " ")
+                .Replace("\n", " ");
+
+                if (inner.CommandText[0] == ' ')
+                {
+                    inner.CommandText = inner.CommandText.Substring(1);
+                }
+            }
         }
 
         public override int CommandTimeout

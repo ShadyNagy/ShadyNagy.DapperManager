@@ -72,7 +72,13 @@ namespace ShadyNagy.DapperInMemory
                 {
                     return ExcuteInsert();
                 }
+                else if (GetSqlCommandType() == SqlSyntexType.CreateTable)
+                {
+                    return ExcuteCreateTable();
+                }
             }
+
+            return 0;
         }
 
         public IDataReader? ExecuteReader()
@@ -138,6 +144,10 @@ namespace ShadyNagy.DapperInMemory
             {
                 return SqlSyntexType.Update;
             }
+            else if (parts[0].ToLower() == "create" && parts[1].ToLower() == "table")
+            {
+                return SqlSyntexType.CreateTable;
+            }
 
             return SqlSyntexType.Nothing;
         }
@@ -164,7 +174,7 @@ namespace ShadyNagy.DapperInMemory
             return parts[2];
         }
 
-        private string[] GetInsertColumns()
+        private string GetCreateTableName()
         {
             var parts = GetCommandTextParts();
             if (parts.Length <= 2)
@@ -173,17 +183,107 @@ namespace ShadyNagy.DapperInMemory
             }
 
             return parts[2];
+        }        
+
+        private string[] GetInsertColumns(string tableName)
+        {
+            var parts = CommandText.Split(tableName);
+            if (parts.Length <= 1)
+            {
+                return new string[0];
+            }
+
+            var partsSub = parts[1].Split("VALUES");
+            var columnsString = partsSub[0]
+                .Replace(" ", string.Empty)
+                .Replace("(", string.Empty)
+                .Replace(")", string.Empty);
+
+            return columnsString.Split(",");
         }
 
-        private string[] GetInsertValues()
+        private DataColumn[] GetCreateTableColumns(string tableName)
         {
-            var parts = GetCommandTextParts();
-            if (parts.Length <= 2)
+            var result = new List<DataColumn>();
+
+            var parts = CommandText.Split(tableName);
+            if (parts.Length <= 1)
             {
-                return string.Empty;
+                return result.ToArray();
+            }
+            
+            var partsSub = parts[1].Split(",");
+            for (var i = 0; i < partsSub.Length; i++)
+            {
+                var column = new DataColumn();
+                var columnData = partsSub[i]
+                    .Replace(";", string.Empty)
+                    .Replace("(", string.Empty)
+                    .Replace(")", string.Empty)
+                    .TrimStart()
+                    .TrimEnd();
+
+                var columnParts = columnData.Split(" ");
+                for (var c = 0; c < 3; c++)
+                {
+                    if (string.IsNullOrEmpty(column.ColumnName))
+                    {
+                        column.ColumnName = columnParts[c];
+                    }
+                    else if (c == 1)
+                    {
+                        column.DataType = GetDataType(columnParts[c]);
+                    }
+                    else
+                    {
+                        column.AllowDBNull = columnParts[c].ToUpper() == "NULL" ? true: false;
+                    }                        
+                }
+
+                result.Add(column);
             }
 
-            return parts[2];
+            return result.ToArray();
+        }        
+
+        private Type GetDataType(string type)
+        {
+            if (type.ToUpper().Contains("VARCHAR2"))
+            {
+                return typeof(string);
+            }
+            else if (type.ToUpper().Contains("NUMBER"))
+            {
+                return typeof(int);
+            }
+
+            return typeof(string);
+        }
+
+        private string[] GetInsertValues(string tableName)
+        {
+            var parts = CommandText.Split(tableName);
+            if (parts.Length <= 1)
+            {
+                return new string[1];
+            }
+
+            var partsSub = parts[1].Split("VALUES");
+            partsSub[1] = Between(partsSub[1], "(", ")");
+            var values = partsSub[1]
+                .Replace(" ", string.Empty)
+                .Replace(";", string.Empty);
+
+            return values.Split(",");
+        }
+
+        private string Between(string data, string FirstString, string LastString)
+        {
+            var pos1 = data.IndexOf(FirstString) + FirstString.Length;
+            var pos2 = data.IndexOf(LastString);
+            var finalString = data.Substring(pos1, pos2 - pos1);
+
+            return finalString;
         }
 
         private IDataReader? ExcuteSelect()
@@ -199,18 +299,60 @@ namespace ShadyNagy.DapperInMemory
 
         private int ExcuteInsert()
         {
+            var addedRows = 0;
             var tableName = GetInsertTableName();
 
             if (!_currentDataSet.Tables.Contains(tableName))
             {
-                return 0;
+                return addedRows;
             }
-            return _currentDataSet.CreateDataReader();
+            var table = _currentDataSet.Tables[tableName];
+
+            var columns = GetInsertColumns(tableName);
+            if (columns.Length <= 0)
+            {
+                return addedRows;
+            }
+            var values = GetInsertValues(tableName);
+            if (values.Length <= 0)
+            {
+                return addedRows;
+            }
+
+            DataRow row = table.NewRow();
+            for (var i = 0; i < columns.Length; i++)
+            {
+                row[columns[i]] = values[i];
+                addedRows++;
+            }
+
+            return addedRows;
+        }
+
+        private int ExcuteCreateTable()
+        {
+            var affectedCount = 0;
+            var tableName = GetCreateTableName();
+
+            if (_currentDataSet.Tables.Contains(tableName))
+            {
+                _currentDataSet.Tables.Remove(tableName);
+            }
+            var columns = GetCreateTableColumns(tableName);
+            if (columns.Length <= 0)
+            {
+                return affectedCount;
+            }
+
+            var table = _currentDataSet.Tables.Add(tableName);
+            for (var i = 0; i < columns.Length; i++)
+            {
+                table.Columns.Add(columns[i]);
+            }
+
+            affectedCount = 1;
+
+            return affectedCount;
         }
     }
 }
-
-INSERT INTO table
-(column1, column2, ... column_n )
-VALUES
-(expression1, expression2, ... expression_n);

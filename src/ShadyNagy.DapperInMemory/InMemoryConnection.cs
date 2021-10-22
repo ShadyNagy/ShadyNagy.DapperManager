@@ -7,7 +7,7 @@ namespace ShadyNagy.DapperInMemory
 {
     public class InMemoryConnection : IDbConnection
     {
-        private readonly Dictionary<string, DataSet> dataSets = new Dictionary<string, DataSet>();
+        private static readonly Dictionary<string, DataSet> dataSets = new Dictionary<string, DataSet>();
         private string _connectionString = string.Empty;
         private ConnectionState _state = ConnectionState.Closed;
         private string _databaseName = string.Empty;
@@ -62,7 +62,6 @@ namespace ShadyNagy.DapperInMemory
         public void Dispose()
         {
             Close();
-            dataSets.Remove(_databaseName);
         }
 
         public void Open()
@@ -72,6 +71,10 @@ namespace ShadyNagy.DapperInMemory
 
         private void AddNewDatabase(string databaseName)
         {
+            if (dataSets.Keys.Contains(databaseName))
+            {
+                return;
+            }
             dataSets.Add(databaseName, new DataSet());
         }
 
