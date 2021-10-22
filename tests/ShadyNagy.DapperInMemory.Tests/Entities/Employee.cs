@@ -1,4 +1,4 @@
-﻿namespace ShadyNagy.DapperInMemory.Tests.Models
+﻿namespace ShadyNagy.DapperInMemory.Tests.Entities
 {
     internal class Employee
     {

@@ -5,7 +5,7 @@ using Dapper;
 using System.Threading.Tasks;
 using Shouldly;
 using ShadyNagy.DapperInMemory.Tests.Helpers;
-using ShadyNagy.DapperInMemory.Tests.Models;
+using ShadyNagy.DapperInMemory.Tests.Entities;
 using System.Linq;
 
 namespace ShadyNagy.DapperInMemory.Tests

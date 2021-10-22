@@ -9,13 +9,16 @@ using Xunit;
 
 namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
 {
-    public class ResetTest
+    public class GetFromAsyncTest
     {
         private DiHelper _diHelper = DiHelper.Create();
 
         [Fact]
         public async Task ReturnsListSuccessAsync()
         {
+            await DatabaseHelper.CreateTestTableAsync();
+            await DatabaseHelper.InsertTestRowAsync();
+
             var tableName = "EMPLOYEES";
             var oracleSyntexBuilder = _diHelper.GetService<IDapperService>();
             var employees = await oracleSyntexBuilder.GetFromAsync<Employee>(tableName);
