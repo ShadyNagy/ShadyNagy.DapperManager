@@ -5,7 +5,7 @@ using Shouldly;
 using System;
 using Xunit;
 
-namespace ShadyNagy.DapperManager.Tests
+namespace ShadyNagy.DapperManager.Tests.OracleSyntexBuilderTests
 {
     public class ResetTest
     {

@@ -4,7 +4,7 @@ using ShadyNagy.DapperManager.Tests.Helpers;
 using Shouldly;
 using Xunit;
 
-namespace ShadyNagy.DapperManager.Tests
+namespace ShadyNagy.DapperManager.Tests.OracleSyntexBuilderTests
 {
     public class SelectAllFromTest
     {
