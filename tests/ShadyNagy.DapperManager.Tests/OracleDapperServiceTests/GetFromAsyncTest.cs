@@ -20,8 +20,8 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
             await DatabaseHelper.InsertTestRowAsync();
 
             var tableName = "EMPLOYEES";
-            var oracleSyntexBuilder = _diHelper.GetService<IDapperService>();
-            var employees = await oracleSyntexBuilder.GetFromAsync<Employee>(tableName);
+            var oracleDapperService = _diHelper.GetService<IDapperService>();
+            var employees = await oracleDapperService.GetFromAsync<Employee>(tableName);
             employees.Count.ShouldBeGreaterThan(0);
         }
     }
