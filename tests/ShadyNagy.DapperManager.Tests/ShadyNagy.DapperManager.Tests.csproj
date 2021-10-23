@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\ShadyNagy.DapperInMemory\ShadyNagy.DapperInMemory.csproj" />
     <ProjectReference Include="..\..\src\ShadyNagy.DapperManager\ShadyNagy.DapperManager.csproj" />
   </ItemGroup>
 
