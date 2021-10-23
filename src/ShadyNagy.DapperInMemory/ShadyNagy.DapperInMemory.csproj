@@ -3,8 +3,27 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <PackageId>ShadyNagy.DapperInMemory</PackageId>
+    <Title>ShadyNagy.DapperInMemory</Title>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Shady Nagy (@ShadyNagy_)</Authors>
+    <Company>ShadyNagy.com</Company>
+    <PackageProjectUrl>https://github.com/ShadyNagy/ShadyNagy.DapperManager</PackageProjectUrl>
+    <Description>Dapper test helpers.</Description>
+    <Summary>Dapper test helpers.</Summary>
+    <RepositoryUrl>https://github.com/ShadyNagy/ShadyNagy.DapperManager</RepositoryUrl>
+    <PackageTags>dapper extension method methods c# .net dotnet helpers test tests</PackageTags>
+    <PackageReleaseNotes>Initialize</PackageReleaseNotes>
+    <Version>0.1.0</Version>
+    <AssemblyName>ShadyNagy.DapperInMemory</AssemblyName>
+    <PackageIconUrl>https://user-images.githubusercontent.com/6225593/138565536-345b379c-f8a9-4fb8-8156-64625330ca2c.png</PackageIconUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <LangVersion>8.0</LangVersion>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.90" />
   </ItemGroup>
