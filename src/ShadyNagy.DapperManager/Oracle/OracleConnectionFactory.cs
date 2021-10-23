@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using Oracle.ManagedDataAccess.Client;
-using ShadyNagy.DapperManager.Interfaces;
+using ShadyNagy.Dapper.SharedKernel.Interfaces;
 
 namespace ShadyNagy.DapperManager.Oracle
 {

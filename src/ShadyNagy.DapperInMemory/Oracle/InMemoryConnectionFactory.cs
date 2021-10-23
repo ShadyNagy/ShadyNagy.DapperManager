@@ -1,10 +1,8 @@
-﻿using System;
+﻿using ShadyNagy.Dapper.SharedKernel.Interfaces;
+using System;
 using System.Data;
-using Oracle.ManagedDataAccess.Client;
-using ShadyNagy.DapperInMemory;
-using ShadyNagy.DapperManager.Interfaces;
 
-namespace ShadyNagy.DapperManager.Oracle
+namespace ShadyNagy.DapperInMemory.Oracle
 {
     public class InMemoryConnectionFactory : ISqlConnectionFactory, IDisposable
     {

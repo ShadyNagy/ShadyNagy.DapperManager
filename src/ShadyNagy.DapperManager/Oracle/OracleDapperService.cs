@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Logging;
+using ShadyNagy.Dapper.SharedKernel.Interfaces;
 using ShadyNagy.DapperManager.Interfaces;
 using System;
 using System.Collections.Generic;

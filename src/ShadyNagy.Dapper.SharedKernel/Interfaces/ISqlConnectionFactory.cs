@@ -1,6 +1,6 @@
 ﻿using System.Data;
 
-namespace ShadyNagy.DapperManager.Interfaces
+namespace ShadyNagy.Dapper.SharedKernel.Interfaces
 {
     public interface ISqlConnectionFactory
     {

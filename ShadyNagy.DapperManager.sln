@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShadyNagy.DapperManager.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShadyNagy.DapperInMemory", "src\ShadyNagy.DapperInMemory\ShadyNagy.DapperInMemory.csproj", "{AC85A90C-4D0B-4CA6-A5D4-82C8A64116A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShadyNagy.DapperInMemory.Tests", "tests\ShadyNagy.DapperInMemory.Tests\ShadyNagy.DapperInMemory.Tests.csproj", "{8FA713C3-B61D-4A8B-A372-58732C48DFCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShadyNagy.DapperInMemory.Tests", "tests\ShadyNagy.DapperInMemory.Tests\ShadyNagy.DapperInMemory.Tests.csproj", "{8FA713C3-B61D-4A8B-A372-58732C48DFCA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShadyNagy.Dapper.SharedKernel", "src\ShadyNagy.Dapper.SharedKernel\ShadyNagy.Dapper.SharedKernel.csproj", "{EA570828-E6A2-4877-B0FD-63235075BA55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{8FA713C3-B61D-4A8B-A372-58732C48DFCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8FA713C3-B61D-4A8B-A372-58732C48DFCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8FA713C3-B61D-4A8B-A372-58732C48DFCA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA570828-E6A2-4877-B0FD-63235075BA55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA570828-E6A2-4877-B0FD-63235075BA55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA570828-E6A2-4877-B0FD-63235075BA55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA570828-E6A2-4877-B0FD-63235075BA55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{E9699B0D-6537-483A-84DC-2DA48E8014E0} = {EE6DAA80-18CC-4E09-B823-0CB4E92DE3BB}
 		{AC85A90C-4D0B-4CA6-A5D4-82C8A64116A6} = {1B06445C-A4B0-4880-8CBB-BD5E60363791}
 		{8FA713C3-B61D-4A8B-A372-58732C48DFCA} = {EE6DAA80-18CC-4E09-B823-0CB4E92DE3BB}
+		{EA570828-E6A2-4877-B0FD-63235075BA55} = {1B06445C-A4B0-4880-8CBB-BD5E60363791}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {458E8E0F-0BE6-4CCE-AB95-51C34B1D3785}

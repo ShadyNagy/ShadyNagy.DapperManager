@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using ShadyNagy.Dapper.SharedKernel.Interfaces;
+using ShadyNagy.DapperInMemory.Oracle;
 using ShadyNagy.DapperManager.Interfaces;
 using ShadyNagy.DapperManager.Oracle;
 using ShadyNagy.DapperManager.Tests.Constants;
