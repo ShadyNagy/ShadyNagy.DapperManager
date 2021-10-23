@@ -18,7 +18,7 @@ using (var connection =  My.ConnectionFactory())
 
 ### Package `ShadyNagy.DapperManager` Usage is  
 ```csharp
-var customers = await oracleDapperService.GetFromAsync<Customer>(tableName);
+var customers = await oracleDapperService.GetFromAsync<Customer>("EMPLOYEES");
 ```
 - More information on the tests ShadyNagy.DapperManager.Tests
 
