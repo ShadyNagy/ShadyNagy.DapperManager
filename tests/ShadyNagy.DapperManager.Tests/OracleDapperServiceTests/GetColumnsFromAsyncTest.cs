@@ -25,6 +25,8 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
             var oracleDapperService = _diHelper.GetService<IDapperService>();
             var employees = await oracleDapperService.GetColumnsFromAsync<Employee>(tableName, columns.ToList());
             employees.Count.ShouldBeGreaterThan(0);
+            employees[0].Id.ShouldNotBe(0);
+            employees[0].Name.ShouldBeNull();
         }
     }
 }

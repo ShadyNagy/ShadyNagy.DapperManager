@@ -54,6 +54,7 @@ namespace ShadyNagy.DapperInMemory.Tests
             var sql = @"SELECT ID FROM EMPLOYEES;";
             var employees = (await connection.QueryAsync<Employee>(sql, commandType: CommandType.Text)).ToList();
             employees.Count.ShouldNotBe(0);
+            employees[0].Id.ShouldNotBe(0);
             employees[0].Name.ShouldBeNull();
         }
     }
