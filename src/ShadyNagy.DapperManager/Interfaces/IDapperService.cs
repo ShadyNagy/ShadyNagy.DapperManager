@@ -10,5 +10,7 @@ namespace ShadyNagy.DapperManager.Interfaces
         Task<List<T>> GetColumnsFromAsync<T>(string name, List<string> columnsNames);
         List<T> GetFrom<T>(string name);
         List<T> GetColumnsFrom<T>(string name, List<string> columnsNames);
+        Task<int> InsertAsync<T>(string tableFullName, object toInsert);
+        int Insert<T>(string tableFullName, object toInsert);
     }
 }

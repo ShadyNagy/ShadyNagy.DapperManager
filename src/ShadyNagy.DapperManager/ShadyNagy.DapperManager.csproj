@@ -12,8 +12,8 @@
     <Summary>Dapper manager helpers.</Summary>
     <RepositoryUrl>https://github.com/ShadyNagy/ShadyNagy.DapperManager</RepositoryUrl>
     <PackageTags>dapper extension method methods c# .net dotnet helpers test tests manager</PackageTags>
-    <PackageReleaseNotes>Initialize</PackageReleaseNotes>
-    <Version>0.1.3</Version>
+    <PackageReleaseNotes>Insert added.</PackageReleaseNotes>
+    <Version>0.1.4</Version>
     <AssemblyName>ShadyNagy.DapperManager</AssemblyName>
     <PackageIconUrl>https://user-images.githubusercontent.com/6225593/138565536-345b379c-f8a9-4fb8-8156-64625330ca2c.png</PackageIconUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

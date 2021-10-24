@@ -87,5 +87,35 @@ namespace ShadyNagy.DapperManager.Oracle
                 return null;
             }
         }
+
+        public async Task<int> InsertAsync<T>(string tableFullName, object toInsert)
+        {
+            try
+            {
+                var connection = _sqlConnectionFactory.GetOpenConnection();
+
+                return await connection.ExecuteAsync(_oracleSyntexBuilder.Insert(tableFullName, toInsert).Build(), commandType: CommandType.Text);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception.Message);
+                return -1;
+            }
+        }
+
+        public int Insert<T>(string tableFullName, object toInsert)
+        {
+            try
+            {
+                var connection = _sqlConnectionFactory.GetOpenConnection();
+
+                return connection.Execute(_oracleSyntexBuilder.Insert(tableFullName, toInsert).Build(), commandType: CommandType.Text);
+            }
+            catch (Exception exception)
+            {
+                _logger.LogError(exception.Message);
+                return -1;
+            }
+        }
     }
 }

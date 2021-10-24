@@ -12,6 +12,9 @@ namespace ShadyNagy.DapperManager.Interfaces
         ISyntexBuilder All();
         ISyntexBuilder Select();
         ISyntexBuilder Select(List<string> columnsNames);
-        ISyntexBuilder From(string name);        
+        ISyntexBuilder From(string name);
+        ISyntexBuilder Insert(string tableFullName, object obj);
+        ISyntexBuilder AddInsertColumns(string[] columns);       
+        ISyntexBuilder AddInserValues(object[] values);
     }
 }
