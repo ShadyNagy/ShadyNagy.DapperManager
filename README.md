@@ -31,4 +31,16 @@ connection.Open();
 var sql = @"SELECT * FROM EMPLOYEES;";
 var employees =  (await connection.QueryAsync<Employee>(sql, commandType: CommandType.Text)).ToList();
 ```
+
+### Insert
+```csharp
+var tableName = "EMPLOYEES";
+var employee = new Employee()
+{
+    Id = 1,
+    Name = "Shady"
+};
+
+var affectedRows = await oracleDapperService.InsertAsync<Employee>(tableName, employee);
+```
 - More information on the tests ShadyNagy.DapperInMemory.Tests
