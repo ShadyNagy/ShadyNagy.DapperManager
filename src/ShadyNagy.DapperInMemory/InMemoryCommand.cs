@@ -152,13 +152,15 @@ namespace ShadyNagy.DapperInMemory
 
         private string GetSelectTableName()
         {
-            var parts = GetCommandTextParts();
-            if (parts.Length <= 3)
+            var fromIndex = CommandText.IndexOf("FROM");
+            var fromString = CommandText.Substring(fromIndex);
+            var parts = fromString.Split(" ");
+            if (parts.Length <= 1)
             {
                 return string.Empty;
             }
 
-            return parts[3];
+            return parts[1];
         }
 
         private string GetInsertTableName()
@@ -181,7 +183,24 @@ namespace ShadyNagy.DapperInMemory
             }
 
             return parts[2];
-        }        
+        }
+
+        
+        private string[] GetSelectTableColumns()
+        {
+            var selectIndex = CommandText.IndexOf("SELECT");
+            var columnsIndex = selectIndex + 6;
+            var fromIndex = CommandText.IndexOf("FROM");
+            var columnsString =  CommandText.Substring(columnsIndex, fromIndex - columnsIndex).Trim();
+
+            var columns = columnsString.Split(",");
+            for (var i = 0; i < columns.Length; i++)
+            {
+                columns[i] = columns[i].TrimStart(' ').TrimEnd(' ');
+            }
+
+            return columns;
+        }
 
         private string[] GetInsertColumns(string tableName)
         {
@@ -292,8 +311,21 @@ namespace ShadyNagy.DapperInMemory
             {
                 return null;
             }
-
+            var columns = GetSelectTableColumns();
             var table = _currentDataSet.Tables[tableName];
+            if (columns.Length > 0 && columns[0] != "*")
+            {
+                DataColumn[] tableColumns = new DataColumn[table.Columns.Count];
+                table.Columns.CopyTo(tableColumns, 0);
+                foreach (DataColumn column in tableColumns)
+                {
+                    if (!columns.Contains(column.ColumnName))
+                    {
+                        table.Columns.Remove(column.ColumnName);
+                    }
+                }
+            }
+            
             return table.CreateDataReader();
         }
 

@@ -16,7 +16,7 @@ namespace ShadyNagy.DapperInMemory
 
         public override int Depth => dataReader.Depth;
 
-        public override int FieldCount => dataReader.FieldCount;
+        public override int FieldCount => dataReader == null ? 0 : dataReader.FieldCount;
 
         public override bool HasRows => dataReader.Read();
 
