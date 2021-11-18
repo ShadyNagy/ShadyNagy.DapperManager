@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace ShadyNagy.DapperManager.Tests.Constants
 {
-    internal static class DatabaseConstants
-    {
-        internal static string CONNECTION_STRING = "Database=TestDatabase;Server=.\\SQLEXPRESS;Trusted_Connection=true;";
-    }
+  internal static class DatabaseConstants
+  {
+    internal static string CONNECTION_STRING = "Database=TestDatabase;Server=.\\SQLEXPRESS;Trusted_Connection=true;";
+  }
 }

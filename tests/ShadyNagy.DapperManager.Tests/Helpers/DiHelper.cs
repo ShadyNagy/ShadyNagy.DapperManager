@@ -7,28 +7,28 @@ using ShadyNagy.DapperManager.Tests.Constants;
 
 namespace ShadyNagy.DapperManager.Tests.Helpers
 {
-    internal class DiHelper
+  internal class DiHelper
+  {
+    public ServiceProvider ServiceProvider { get; private set; }
+
+    public static DiHelper Create()
     {
-        public ServiceProvider ServiceProvider { get; private set; }
-
-        public static DiHelper Create()
-        {
-            return new DiHelper();
-        }
-
-        public DiHelper()
-        {
-            var services = new ServiceCollection();
-            services.AddScoped<ISqlConnectionFactory>(sp => new InMemoryConnectionFactory(DatabaseConstants.CONNECTION_STRING));            
-            services.AddScoped<ISyntexBuilder, OracleSyntexBuilder>();
-            services.AddScoped<IDapperService, OracleDapperService>();
-
-            ServiceProvider = services.AddLogging().BuildServiceProvider();
-        }
-
-        public T GetService<T>()
-        {
-            return ServiceProvider.GetService<T>();
-        }
+      return new DiHelper();
     }
+
+    public DiHelper()
+    {
+      var services = new ServiceCollection();
+      services.AddScoped<ISqlConnectionFactory>(sp => new InMemoryConnectionFactory(DatabaseConstants.CONNECTION_STRING));
+      services.AddScoped<ISyntaxBuilder, OracleSyntaxBuilder>();
+      services.AddScoped<IDapperService, OracleDapperService>();
+
+      ServiceProvider = services.AddLogging().BuildServiceProvider();
+    }
+
+    public T GetService<T>()
+    {
+      return ServiceProvider.GetService<T>();
+    }
+  }
 }

@@ -3,18 +3,18 @@ using System.Data;
 
 namespace ShadyNagy.DapperManager.Interfaces
 {
-    public interface ISyntexBuilder
-    {
-        string Build();
-        ISyntexBuilder Reset();
-        ISyntexBuilder SelectAllFrom(string name);
-        ISyntexBuilder SelectColumnsFrom(string name, List<string> columnsNames);
-        ISyntexBuilder All();
-        ISyntexBuilder Select();
-        ISyntexBuilder Select(List<string> columnsNames);
-        ISyntexBuilder From(string name);
-        ISyntexBuilder Insert(string tableFullName, object obj);
-        ISyntexBuilder AddInsertColumns(string[] columns);       
-        ISyntexBuilder AddInserValues(object[] values);
-    }
+  public interface ISyntaxBuilder
+  {
+    string Build();
+    ISyntaxBuilder Reset();
+    ISyntaxBuilder SelectAllFrom(string name);
+    ISyntaxBuilder SelectColumnsFrom(string name, List<string> columnsNames);
+    ISyntaxBuilder All();
+    ISyntaxBuilder Select();
+    ISyntaxBuilder Select(List<string> columnsNames);
+    ISyntaxBuilder From(string name);
+    ISyntaxBuilder Insert(string tableFullName, object obj);
+    ISyntaxBuilder AddInsertColumns(string[] columns);
+    ISyntaxBuilder AddInserValues(object[] values);
+  }
 }

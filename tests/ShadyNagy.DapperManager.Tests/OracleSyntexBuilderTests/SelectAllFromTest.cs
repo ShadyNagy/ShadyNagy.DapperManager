@@ -1,24 +1,24 @@
-using ShadyNagy.DapperManager.Interfaces;
+﻿using ShadyNagy.DapperManager.Interfaces;
 using ShadyNagy.DapperManager.Oracle;
 using ShadyNagy.DapperManager.Tests.Helpers;
 using Shouldly;
 using Xunit;
 
-namespace ShadyNagy.DapperManager.Tests.OracleSyntexBuilderTests
+namespace ShadyNagy.DapperManager.Tests.OracleSyntaxBuilderTests
 {
-    public class SelectAllFromTest
+  public class SelectAllFromTest
+  {
+    private DiHelper _diHelper = DiHelper.Create();
+
+    [Fact]
+    public void ReturnsSelectAllSyntaxString()
     {
-        private DiHelper _diHelper = DiHelper.Create();
+      var tableName = "TABLE";
+      var expected = $"SELECT * FROM {tableName}";
 
-        [Fact]
-        public void ReturnsSelectAllSyntexString()
-        {
-            var tableName = "TABLE";
-            var expected = $"SELECT * FROM {tableName}";
-
-            var oracleSyntexBuilder = _diHelper.GetService<ISyntexBuilder>();
-            oracleSyntexBuilder.SelectAllFrom(tableName);
-            oracleSyntexBuilder.Build().ShouldBe(expected);
-        }
+      var oracleSyntaxBuilder = _diHelper.GetService<ISyntaxBuilder>();
+      oracleSyntaxBuilder.SelectAllFrom(tableName);
+      oracleSyntaxBuilder.Build().ShouldBe(expected);
     }
+  }
 }

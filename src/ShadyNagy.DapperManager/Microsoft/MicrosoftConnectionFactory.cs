@@ -1,15 +1,16 @@
 ﻿using System;
 using System.Data;
+using Oracle.ManagedDataAccess.Client;
 using ShadyNagy.Dapper.SharedKernel.Interfaces;
 
-namespace ShadyNagy.DapperInMemory.Oracle
+namespace ShadyNagy.DapperManager.Microsoft
 {
-  public class InMemoryConnectionFactory : ISqlConnectionFactory, IDisposable
+  public class MicrosoftConnectionFactory : ISqlConnectionFactory, IDisposable
   {
     private readonly string _connectionString;
     private IDbConnection _connection;
 
-    public InMemoryConnectionFactory(string connectionString)
+    public MicrosoftConnectionFactory(string connectionString)
     {
       _connectionString = connectionString;
     }
@@ -18,7 +19,7 @@ namespace ShadyNagy.DapperInMemory.Oracle
     {
       if (_connection == null || _connection.State != ConnectionState.Open)
       {
-        _connection = new InMemoryConnection(_connectionString);
+        _connection = new OracleConnection(_connectionString);
         _connection.Open();
       }
 

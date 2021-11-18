@@ -5,9 +5,9 @@ using System.Reflection;
 using System.Text;
 using ShadyNagy.DapperManager.Interfaces;
 
-namespace ShadyNagy.DapperManager.Oracle
+namespace ShadyNagy.DapperManager.Microsoft
 {
-  public class OracleSyntaxBuilder : ISyntaxBuilder
+  public class MicrosoftSyntaxBuilder : ISyntaxBuilder
   {
     private const string SELECT = "SELECT";
     private const string FROM = "FROM";

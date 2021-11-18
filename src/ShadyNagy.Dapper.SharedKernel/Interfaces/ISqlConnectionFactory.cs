@@ -2,8 +2,8 @@
 
 namespace ShadyNagy.Dapper.SharedKernel.Interfaces
 {
-    public interface ISqlConnectionFactory
-    {
-        IDbConnection GetOpenConnection();
-    }
+  public interface ISqlConnectionFactory
+  {
+    IDbConnection GetOpenConnection();
+  }
 }

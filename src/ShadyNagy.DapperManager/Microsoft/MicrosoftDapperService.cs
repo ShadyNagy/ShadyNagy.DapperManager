@@ -8,20 +8,20 @@ using Microsoft.Extensions.Logging;
 using ShadyNagy.Dapper.SharedKernel.Interfaces;
 using ShadyNagy.DapperManager.Interfaces;
 
-namespace ShadyNagy.DapperManager.Oracle
+namespace ShadyNagy.DapperManager.Microsoft
 {
-  public class OracleDapperService : IDapperService
+  public class MicrosoftDapperService : IDapperService
   {
     private readonly ISqlConnectionFactory _sqlConnectionFactory;
-    private readonly ISyntaxBuilder _oracleSyntaxBuilder;
-    private ILogger<OracleDapperService> _logger { get; }
+    private readonly ISyntaxBuilder _microsoftSyntaxBuilder;
+    private ILogger<MicrosoftDapperService> _logger { get; }
 
-    public OracleDapperService(ISqlConnectionFactory sqlConnectionFactory, ISyntaxBuilder oracleSyntaxBuilder, ILogger<OracleDapperService> logger)
+    public MicrosoftDapperService(ISqlConnectionFactory sqlConnectionFactory, ISyntaxBuilder microsoftSyntaxBuilder, ILogger<MicrosoftDapperService> logger)
     {
       _sqlConnectionFactory = sqlConnectionFactory;
-      _oracleSyntaxBuilder = oracleSyntaxBuilder;
+      _microsoftSyntaxBuilder = microsoftSyntaxBuilder;
       _logger = logger;
-      _oracleSyntaxBuilder.Reset();
+      _microsoftSyntaxBuilder.Reset();
     }
 
     public async Task<List<T>> GetFromAsync<T>(string name)
@@ -30,7 +30,7 @@ namespace ShadyNagy.DapperManager.Oracle
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return (await connection.QueryAsync<T>(_oracleSyntaxBuilder.SelectAllFrom(name).Build(), commandType: CommandType.Text)).ToList();
+        return (await connection.QueryAsync<T>(_microsoftSyntaxBuilder.SelectAllFrom(name).Build(), commandType: CommandType.Text)).ToList();
       }
       catch (Exception exception)
       {
@@ -45,9 +45,9 @@ namespace ShadyNagy.DapperManager.Oracle
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        var oracleSyntaxBuilder = new OracleSyntaxBuilder();
+        var microsoftSyntaxBuilder = new MicrosoftSyntaxBuilder();
 
-        return (await connection.QueryAsync<T>(oracleSyntaxBuilder.SelectColumnsFrom(name, columnsNames).Build(), commandType: CommandType.Text)).ToList();
+        return (await connection.QueryAsync<T>(microsoftSyntaxBuilder.SelectColumnsFrom(name, columnsNames).Build(), commandType: CommandType.Text)).ToList();
       }
       catch (Exception exception)
       {
@@ -62,7 +62,7 @@ namespace ShadyNagy.DapperManager.Oracle
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return connection.Query<T>(_oracleSyntaxBuilder.SelectAllFrom(name).Build(), commandType: CommandType.Text).ToList();
+        return connection.Query<T>(_microsoftSyntaxBuilder.SelectAllFrom(name).Build(), commandType: CommandType.Text).ToList();
       }
       catch (Exception exception)
       {
@@ -77,9 +77,9 @@ namespace ShadyNagy.DapperManager.Oracle
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        var oracleSyntaxBuilder = new OracleSyntaxBuilder();
+        var microsoftSyntaxBuilder = new MicrosoftSyntaxBuilder();
 
-        return connection.Query<T>(oracleSyntaxBuilder.SelectColumnsFrom(name, columnsNames).Build(), commandType: CommandType.Text).ToList();
+        return connection.Query<T>(microsoftSyntaxBuilder.SelectColumnsFrom(name, columnsNames).Build(), commandType: CommandType.Text).ToList();
       }
       catch (Exception exception)
       {
@@ -94,7 +94,7 @@ namespace ShadyNagy.DapperManager.Oracle
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return await connection.ExecuteAsync(_oracleSyntaxBuilder.Insert(tableFullName, toInsert).Build(), commandType: CommandType.Text);
+        return await connection.ExecuteAsync(_microsoftSyntaxBuilder.Insert(tableFullName, toInsert).Build(), commandType: CommandType.Text);
       }
       catch (Exception exception)
       {
@@ -109,7 +109,7 @@ namespace ShadyNagy.DapperManager.Oracle
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return connection.Execute(_oracleSyntaxBuilder.Insert(tableFullName, toInsert).Build(), commandType: CommandType.Text);
+        return connection.Execute(_microsoftSyntaxBuilder.Insert(tableFullName, toInsert).Build(), commandType: CommandType.Text);
       }
       catch (Exception exception)
       {

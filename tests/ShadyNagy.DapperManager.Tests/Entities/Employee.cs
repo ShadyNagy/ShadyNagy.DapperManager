@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShadyNagy.DapperManager.Tests.Entities
 {
-    internal class Employee
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
+  internal class Employee
+  {
+    public int Id { get; set; }
+    public string Name { get; set; }
+  }
 }
