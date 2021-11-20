@@ -4,6 +4,12 @@
 A NuGet library that will extend your IDbConnection interface
 with awesome extensions!  
 
+### Load Services
+```csharp
+services.AddMicrosoftSqlServices(DatabaseConstants.CONNECTION_STRING);
+services.AddOracleSqlServices(DatabaseConstants.CONNECTION_STRING);
+```
+
 ### Dapper Usage is  
 ```csharp
 string sql = "INSERT INTO Customers (CustomerName) Values (@CustomerName);";
