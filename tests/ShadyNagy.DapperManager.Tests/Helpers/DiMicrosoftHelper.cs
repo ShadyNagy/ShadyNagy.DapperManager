@@ -1,27 +1,23 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ShadyNagy.Dapper.SharedKernel.Interfaces;
 using ShadyNagy.DapperInMemory.Oracle;
-using ShadyNagy.DapperManager.Interfaces;
-using ShadyNagy.DapperManager.Oracle;
+using ShadyNagy.DapperManager.Extensions;
 using ShadyNagy.DapperManager.Tests.Constants;
 
 namespace ShadyNagy.DapperManager.Tests.Helpers
 {
-  internal class DiHelper
+  internal class DiMicrosoftHelper
   {
     public ServiceProvider ServiceProvider { get; private set; }
 
-    public static DiHelper Create()
+    public static DiMicrosoftHelper Create()
     {
-      return new DiHelper();
+      return new DiMicrosoftHelper();
     }
 
-    public DiHelper()
+    public DiMicrosoftHelper()
     {
       var services = new ServiceCollection();
-      services.AddScoped<ISqlConnectionFactory>(sp => new InMemoryConnectionFactory(DatabaseConstants.CONNECTION_STRING));
-      services.AddScoped<ISyntaxBuilder, OracleSyntaxBuilder>();
-      services.AddScoped<IDapperService, OracleDapperService>();
+      services.AddMicrosoftSqlServices(new InMemoryConnectionFactory(DatabaseConstants.CONNECTION_STRING));
 
       ServiceProvider = services.AddLogging().BuildServiceProvider();
     }

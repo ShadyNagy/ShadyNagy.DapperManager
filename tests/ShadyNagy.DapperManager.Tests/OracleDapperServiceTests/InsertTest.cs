@@ -12,7 +12,7 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
 {
   public class InsertTest
   {
-    private DiHelper _diHelper = DiHelper.Create();
+    private DiOracleHelper _diOracleHelper = DiOracleHelper.Create();
 
     [Fact]
     public async Task ReturnsListSuccessAsync()
@@ -25,7 +25,7 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
         Id = 1,
         Name = "Shady"
       };
-      var oracleDapperService = _diHelper.GetService<IDapperService>();
+      var oracleDapperService = _diOracleHelper.GetService<IDapperService>();
       var affectedRows = oracleDapperService.Insert<Employee>(tableName, employee);
       affectedRows.ShouldBeGreaterThan(0);
 

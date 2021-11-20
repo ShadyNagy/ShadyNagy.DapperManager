@@ -9,7 +9,7 @@ namespace ShadyNagy.DapperManager.Tests.OracleSyntaxBuilderTests
 {
   public class SelectColumnsFromTest
   {
-    private DiHelper _diHelper = DiHelper.Create();
+    private DiOracleHelper _diOracleHelper = DiOracleHelper.Create();
 
     [Fact]
     public void ReturnsSelectAllSyntaxString()
@@ -19,7 +19,7 @@ namespace ShadyNagy.DapperManager.Tests.OracleSyntaxBuilderTests
       var expected = $"SELECT EMPLOYEES,COUNTRIES FROM {tableName}";
 
 
-      var oracleSyntaxBuilder = _diHelper.GetService<ISyntaxBuilder>();
+      var oracleSyntaxBuilder = _diOracleHelper.GetService<ISyntaxBuilder>();
       oracleSyntaxBuilder.SelectColumnsFrom(tableName, columnsNames);
       oracleSyntaxBuilder.Build().ShouldBe(expected);
     }

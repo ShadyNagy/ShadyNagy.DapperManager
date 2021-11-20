@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
 using ShadyNagy.DapperManager.Interfaces;
-using ShadyNagy.DapperManager.Oracle;
 using ShadyNagy.DapperManager.Tests.Entities;
 using ShadyNagy.DapperManager.Tests.Helpers;
 using Shouldly;
@@ -11,7 +10,7 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
 {
   public class GetFromAsyncTest
   {
-    private DiHelper _diHelper = DiHelper.Create();
+    private DiOracleHelper _diOracleHelper = DiOracleHelper.Create();
 
     [Fact]
     public async Task ReturnsListSuccessAsync()
@@ -20,7 +19,7 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
       await DatabaseHelper.InsertTestRowAsync();
 
       var tableName = "EMPLOYEES";
-      var oracleDapperService = _diHelper.GetService<IDapperService>();
+      var oracleDapperService = _diOracleHelper.GetService<IDapperService>();
       var employees = await oracleDapperService.GetFromAsync<Employee>(tableName);
       employees.Count.ShouldBeGreaterThan(0);
     }
