@@ -17,7 +17,7 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
     [Fact]
     public async Task ReturnsListSuccessAsync()
     {
-      await DatabaseHelper.CreateTestTableAsync();
+      await DatabaseHelper.CreateAllTestTablesAsync();
 
       var tableName = "EMPLOYEES";
       var employee = new Employee()

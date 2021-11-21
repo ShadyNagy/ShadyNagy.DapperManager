@@ -16,8 +16,8 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
     [Fact]
     public async Task ReturnsListSuccessAsync()
     {
-      await DatabaseHelper.CreateTestTableAsync();
-      await DatabaseHelper.InsertTestRowAsync();
+      await DatabaseHelper.CreateAllTestTablesAsync();
+      await DatabaseHelper.InsertAllRowsTablesAsync();
 
       var tableName = "EMPLOYEES";
       var oracleDapperService = _diOracleHelper.GetService<IDapperService>();

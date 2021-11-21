@@ -10,9 +10,9 @@ namespace ShadyNagy.DapperManager.Oracle
 {
   public class OracleDapperInfoService : IDapperInfoService
   {
-    private static string TABLE_TO_GET_TABLES = "INFORMATION_SCHEMA.TABLES";
-    private static string TABLE_TO_GET_VIEWS = "INFORMATION_SCHEMA.VIEWS";
-    private static string TABLE_TO_GET_COLUMNS = "INFORMATION_SCHEMA.COLUMNS";
+    private static string TABLE_TO_GET_TABLES = "SYS.ALL_TABLES";
+    private static string TABLE_TO_GET_VIEWS = "SYS.ALL_VIEWS";
+    private static string TABLE_TO_GET_COLUMNS = "SYS.USER_TAB_COLUMNS";
 
     private readonly IDapperService _oracleDapperService;
     private readonly ILogger<OracleDapperInfoService> _logger;

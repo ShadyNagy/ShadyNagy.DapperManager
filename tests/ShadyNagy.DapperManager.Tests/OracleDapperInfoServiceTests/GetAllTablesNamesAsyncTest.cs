@@ -2,35 +2,30 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ShadyNagy.DapperManager.Interfaces;
-using ShadyNagy.DapperManager.Oracle;
 using ShadyNagy.DapperManager.Tests.Entities;
 using ShadyNagy.DapperManager.Tests.Helpers;
 using Shouldly;
 using Xunit;
 
-namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
+namespace ShadyNagy.DapperManager.Tests.OracleDapperInfoServiceTests
 {
-  public class InsertAsyncTest
+  public class GetAllTablesNamesAsyncTest
   {
     private DiOracleHelper _diOracleHelper = DiOracleHelper.Create();
 
     [Fact]
-    public async Task ReturnsListSuccessAsync()
+    public async Task ReturnsTablesNamesListSuccessAsync()
     {
       await DatabaseHelper.CreateAllTestTablesAsync();
+      await DatabaseHelper.InsertAllRowsTablesAsync();
 
       var tableName = "EMPLOYEES";
-      var employee = new Employee()
-      {
-        Id = 1,
-        Name = "Shady"
-      };
+      var columns = new string[] { "ID" };
       var oracleDapperService = _diOracleHelper.GetService<IDapperService>();
-      var affectedRows = await oracleDapperService.InsertAsync<Employee>(tableName, employee);
-      affectedRows.ShouldBeGreaterThan(0);
-
-      var employees = await oracleDapperService.GetFromAsync<Employee>(tableName);
+      var employees = await oracleDapperService.GetColumnsFromAsync<Employee>(tableName, columns.ToList());
       employees.Count.ShouldBeGreaterThan(0);
+      employees[0].Id.ShouldNotBe(0);
+      employees[0].Name.ShouldBeNull();
     }
   }
 }
