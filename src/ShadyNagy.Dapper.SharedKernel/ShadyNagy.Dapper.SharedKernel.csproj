@@ -4,7 +4,7 @@
         <TargetFramework>netstandard2.1</TargetFramework>
         <PackageId>ShadyNagy.Dapper.SharedKernel</PackageId>
         <Title>ShadyNagy.Dapper.SharedKernel</Title>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
         <Authors>Shady Nagy (@ShadyNagy_)</Authors>
         <Company>ShadyNagy.com</Company>
         <PackageProjectUrl>https://github.com/ShadyNagy/ShadyNagy.DapperManager</PackageProjectUrl>
@@ -13,7 +13,7 @@
         <RepositoryUrl>https://github.com/ShadyNagy/ShadyNagy.DapperManager</RepositoryUrl>
         <PackageTags>dapper extension method methods c# .net dotnet helpers test tests manager</PackageTags>
         <PackageReleaseNotes>Insert added.</PackageReleaseNotes>
-        <Version>0.1.9</Version>
+        <Version>0.1.10</Version>
         <AssemblyName>ShadyNagy.Dapper.SharedKernel</AssemblyName>
         <PackageIconUrl>https://user-images.githubusercontent.com/6225593/138565536-345b379c-f8a9-4fb8-8156-64625330ca2c.png</PackageIconUrl>
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
