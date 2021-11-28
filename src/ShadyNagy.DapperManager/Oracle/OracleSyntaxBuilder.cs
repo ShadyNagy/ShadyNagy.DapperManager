@@ -50,6 +50,22 @@ namespace ShadyNagy.DapperManager.Oracle
       return this;
     }
 
+    public ISyntaxBuilder InsertSafe(string tableFullName, object obj)
+    {
+      if (obj == null)
+      {
+        return this;
+      }
+
+      var properties = GetPropertiesNames(obj);
+      this
+        .Insert(tableFullName)
+        .AddInsertColumns(properties)
+        .AddInsertSafeValues(properties);
+
+      return this;
+    }
+
     public ISyntaxBuilder SelectColumnsFrom(string name, List<string> columnsNames)
     {
       this
@@ -121,6 +137,25 @@ namespace ShadyNagy.DapperManager.Oracle
       for (int i = 0; i < values.Length; i++)
       {
         result.Append(values[i]);
+        result.Append(",");
+      }
+      result = new StringBuilder(result.ToString().Substring(0, result.Length - 1));
+
+      result.Append(")");
+
+      Syntax.Append(result);
+
+      return this;
+    }
+    
+    public ISyntaxBuilder AddInsertSafeValues(string[] properties)
+    {
+      var result = new StringBuilder("VALUES (");
+
+      for (int i = 0; i < properties.Length; i++)
+      {
+        result.Append("@");
+        result.Append(properties[i]);
         result.Append(",");
       }
       result = new StringBuilder(result.ToString().Substring(0, result.Length - 1));

@@ -103,6 +103,21 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
+    public async Task<int> InsertSafeAsync<T>(string tableFullName, object toInsert)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return await connection.ExecuteAsync(_microsoftSyntaxBuilder.InsertSafe(tableFullName, toInsert).Build(), toInsert);
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return -1;
+      }
+    }
+
     public int Insert<T>(string tableFullName, object toInsert)
     {
       try
@@ -110,6 +125,21 @@ namespace ShadyNagy.DapperManager.Microsoft
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
         return connection.Execute(_microsoftSyntaxBuilder.Insert(tableFullName, toInsert).Build(), commandType: CommandType.Text);
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return -1;
+      }
+    }
+
+    public int InsertSafe<T>(string tableFullName, object toInsert)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return connection.Execute(_microsoftSyntaxBuilder.InsertSafe(tableFullName, toInsert).Build(), toInsert);
       }
       catch (Exception exception)
       {

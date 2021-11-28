@@ -103,6 +103,21 @@ namespace ShadyNagy.DapperManager.Oracle
       }
     }
 
+    public async Task<int> InsertSafeAsync<T>(string tableFullName, object toInsert)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return await connection.ExecuteAsync(_oracleSyntaxBuilder.InsertSafe(tableFullName, toInsert).Build(), toInsert);
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return -1;
+      }
+    }
+
     public int Insert<T>(string tableFullName, object toInsert)
     {
       try
@@ -110,6 +125,21 @@ namespace ShadyNagy.DapperManager.Oracle
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
         return connection.Execute(_oracleSyntaxBuilder.Insert(tableFullName, toInsert).Build(), commandType: CommandType.Text);
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return -1;
+      }
+    }
+
+    public int InsertSafe<T>(string tableFullName, object toInsert)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return connection.Execute(_oracleSyntaxBuilder.InsertSafe(tableFullName, toInsert).Build(), toInsert);
       }
       catch (Exception exception)
       {
