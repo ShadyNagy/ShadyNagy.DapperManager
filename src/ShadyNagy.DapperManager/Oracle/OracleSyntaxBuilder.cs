@@ -45,7 +45,7 @@ namespace ShadyNagy.DapperManager.Oracle
       this
           .Insert(tableFullName)
           .AddInsertColumns(properties)
-          .AddInserValues(values);
+          .AddInsertValues(values);
 
       return this;
     }
@@ -114,13 +114,13 @@ namespace ShadyNagy.DapperManager.Oracle
       return this;
     }
 
-    public ISyntaxBuilder AddInserValues(object[] values)
+    public ISyntaxBuilder AddInsertValues(object[] values)
     {
       var result = new StringBuilder("VALUES (");
 
       for (int i = 0; i < values.Length; i++)
       {
-        result.Append(values[i].ToString());
+        result.Append(values[i]);
         result.Append(",");
       }
       result = new StringBuilder(result.ToString().Substring(0, result.Length - 1));
