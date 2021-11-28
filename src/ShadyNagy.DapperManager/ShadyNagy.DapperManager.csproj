@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/ShadyNagy/ShadyNagy.DapperManager</RepositoryUrl>
     <PackageTags>dapper extension method methods c# .net dotnet helpers test tests manager</PackageTags>
     <PackageReleaseNotes>Insert added.</PackageReleaseNotes>
-    <Version>0.1.8</Version>
+    <Version>0.1.9</Version>
     <AssemblyName>ShadyNagy.DapperManager</AssemblyName>
     <PackageIconUrl>https://user-images.githubusercontent.com/6225593/138565536-345b379c-f8a9-4fb8-8156-64625330ca2c.png</PackageIconUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -32,10 +32,7 @@
     <PackageReference Include="Dapper" Version="2.0.90" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Oracle.ManagedDataAccess.Core" Version="3.21.3" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ShadyNagy.Dapper.SharedKernel\ShadyNagy.Dapper.SharedKernel.csproj" />
+    <PackageReference Include="ShadyNagy.Dapper.SharedKernel" Version="0.1.9" />
   </ItemGroup>
   
 </Project>
