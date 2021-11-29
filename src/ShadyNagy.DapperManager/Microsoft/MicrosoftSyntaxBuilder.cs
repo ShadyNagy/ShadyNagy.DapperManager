@@ -13,6 +13,8 @@ namespace ShadyNagy.DapperManager.Microsoft
     private const string FROM = "FROM";
     private const string ALL = "*";
     private const string INSERT = "INSERT INTO";
+    private const string UPDATE = "UPDATE";
+    private const string SET = "SET";
 
     public StringBuilder Syntax { get; private set; } = new StringBuilder();
 
@@ -50,6 +52,22 @@ namespace ShadyNagy.DapperManager.Microsoft
       return this;
     }
 
+    public ISyntaxBuilder Update(string tableFullName, object obj)
+    {
+      if (obj == null)
+      {
+        return this;
+      }
+
+      var properties = GetPropertiesNames(obj);
+      var values = GetPropertiesValues(properties, obj);
+      this
+        .Update(tableFullName)
+        .Set(properties, values);
+
+      return this;
+    }
+
     public ISyntaxBuilder InsertSafe(string tableFullName, object obj, Dictionary<string, string> mapper = null)
     {
       if (obj == null)
@@ -60,10 +78,11 @@ namespace ShadyNagy.DapperManager.Microsoft
       if (mapper == null)
       {
         var properties = GetPropertiesNames(obj);
+        var values = GetPropertiesValues(properties, obj);
         this
           .Insert(tableFullName)
           .AddInsertColumns(properties)
-          .AddInsertSafeValues(properties);
+          .AddInsertValues(values);
       }
       else
       {
@@ -71,6 +90,31 @@ namespace ShadyNagy.DapperManager.Microsoft
           .Insert(tableFullName)
           .AddInsertColumns(mapper.Keys.ToArray())
           .AddInsertSafeValues(mapper.Values.ToArray());
+      }
+
+      return this;
+    }
+
+    public ISyntaxBuilder UpdateSafe(string tableFullName, object obj, Dictionary<string, string> mapper = null)
+    {
+      if (obj == null)
+      {
+        return this;
+      }
+
+      if (mapper == null)
+      {
+        var properties = GetPropertiesNames(obj);
+        var values = GetPropertiesValues(properties, obj);
+        this
+          .Update(tableFullName)
+          .Set(properties, values);
+      }
+      else
+      {
+        this
+          .Update(tableFullName)
+          .SetSafe(mapper.Keys.ToArray(), mapper.Values.ToArray());
       }
 
       return this;
@@ -102,6 +146,49 @@ namespace ShadyNagy.DapperManager.Microsoft
     public ISyntaxBuilder Insert(string tableFullName)
     {
       Syntax = new StringBuilder($"{INSERT} {tableFullName} ");
+
+      return this;
+    }
+
+    public ISyntaxBuilder Update(string tableFullName)
+    {
+      Syntax = new StringBuilder($"{UPDATE} {tableFullName} ");
+
+      return this;
+    }
+
+    public ISyntaxBuilder Set(string[] columnsNames, object[] values)
+    {
+      Syntax.Append($"{SET} ");
+
+      var columnsValues = new List<string>();
+      for (var i = 0; i < columnsNames.Length; i++)
+      {
+        if (i >= values.Length)
+        {
+          break;
+        }
+        columnsValues.Add($"{columnsNames[i]}={values[i]}");
+      }
+      Syntax.Append(string.Join(",", columnsValues.ToArray()));
+
+      return this;
+    }
+
+    public ISyntaxBuilder SetSafe(string[] columnsNames, string[] parametersNames)
+    {
+      Syntax.Append($"{SET} ");
+
+      var columnsValues = new List<string>();
+      for (var i = 0; i < columnsNames.Length; i++)
+      {
+        if (i >= parametersNames.Length)
+        {
+          break;
+        }
+        columnsValues.Add($"{columnsNames[i]}=@{parametersNames[i]}");
+      }
+      Syntax.Append(string.Join(",", columnsValues.ToArray()));
 
       return this;
     }

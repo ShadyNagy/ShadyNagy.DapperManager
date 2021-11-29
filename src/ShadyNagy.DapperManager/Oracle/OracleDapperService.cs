@@ -147,5 +147,65 @@ namespace ShadyNagy.DapperManager.Oracle
         return -1;
       }
     }
+
+    public async Task<int> UpdateAsync(string tableFullName, object toUpdate)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return await connection.ExecuteAsync(_oracleSyntaxBuilder.Update(tableFullName, toUpdate).Build(), commandType: CommandType.Text);
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return -1;
+      }
+    }
+
+    public async Task<int> UpdateSafeAsync(string tableFullName, object toUpdate, Dictionary<string, string> mapper)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return await connection.ExecuteAsync(_oracleSyntaxBuilder.UpdateSafe(tableFullName, toUpdate, mapper).Build(), toUpdate);
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return -1;
+      }
+    }
+
+    public int Update(string tableFullName, object toUpdate)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return connection.Execute(_oracleSyntaxBuilder.Update(tableFullName, toUpdate).Build(), commandType: CommandType.Text);
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return -1;
+      }
+    }
+
+    public int UpdateSafe(string tableFullName, object toInsert, Dictionary<string, string> mapper)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return connection.Execute(_oracleSyntaxBuilder.UpdateSafe(tableFullName, toInsert, mapper).Build(), toInsert);
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return -1;
+      }
+    }
   }
 }

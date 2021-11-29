@@ -14,5 +14,9 @@ namespace ShadyNagy.DapperManager.Interfaces
     Task<int> InsertSafeAsync(string tableFullName, object toInsert, Dictionary<string, string> mapper);
     int Insert(string tableFullName, object toInsert);
     int InsertSafe(string tableFullName, object toInsert, Dictionary<string, string> mapper);
+    Task<int> UpdateAsync(string tableFullName, object toUpdate);
+    Task<int> UpdateSafeAsync(string tableFullName, object toUpdate, Dictionary<string, string> mapper);
+    int Update(string tableFullName, object toUpdate);
+    int UpdateSafe(string tableFullName, object toInsert, Dictionary<string, string> mapper);
   }
 }
