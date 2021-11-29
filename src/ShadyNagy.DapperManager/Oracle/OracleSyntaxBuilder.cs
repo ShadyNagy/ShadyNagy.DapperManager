@@ -152,7 +152,7 @@ namespace ShadyNagy.DapperManager.Oracle
 
     public ISyntaxBuilder Where(Dictionary<string, object> keys)
     {
-      Syntax.Append($"{WHERE} ");
+      Syntax.Append($" {WHERE} ");
 
       var whereValues = new List<string>();
       foreach (var key in keys)
@@ -160,14 +160,14 @@ namespace ShadyNagy.DapperManager.Oracle
         whereValues.Add($"{key.Key}={key.Value}");
 
       }
-      Syntax.Append(string.Join(" AND ", whereValues.ToArray()));
+      Syntax.Append(string.Join($" {AND} ", whereValues.ToArray()));
 
       return this;
     }
 
     public ISyntaxBuilder WhereSafe(Dictionary<string, string> keys)
     {
-      Syntax.Append($"{WHERE} ");
+      Syntax.Append($" {WHERE} ");
 
       var whereValues = new List<string>();
       foreach (var key in keys)
@@ -175,7 +175,7 @@ namespace ShadyNagy.DapperManager.Oracle
         whereValues.Add($"{key.Key}=@{key.Value}");
 
       }
-      Syntax.Append(string.Join(" AND ", whereValues.ToArray()));
+      Syntax.Append(string.Join($" {AND} ", whereValues.ToArray()));
 
       return this;
     }
