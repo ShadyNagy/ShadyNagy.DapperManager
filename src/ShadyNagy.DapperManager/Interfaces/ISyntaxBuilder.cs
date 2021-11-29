@@ -16,8 +16,10 @@ namespace ShadyNagy.DapperManager.Interfaces
     ISyntaxBuilder Insert(string tableFullName, object obj);
     ISyntaxBuilder InsertSafe(string tableFullName, object obj, Dictionary<string, string> mapper);
     ISyntaxBuilder Update(string tableFullName);
-    ISyntaxBuilder Update(string tableFullName, object obj);
-    ISyntaxBuilder UpdateSafe(string tableFullName, object obj, Dictionary<string, string> mapper = null);
+    ISyntaxBuilder Where(Dictionary<string, object> keys);
+    ISyntaxBuilder WhereSafe(Dictionary<string, string> keys);
+    ISyntaxBuilder Update(string tableFullName, Dictionary<string, object> keys, object obj);
+    ISyntaxBuilder UpdateSafe(string tableFullName, object obj, Dictionary<string, string> keys, Dictionary<string, string> mapper);
     ISyntaxBuilder Set(string[] columnsNames, object[] values);
     ISyntaxBuilder SetSafe(string[] columnsNames, string[] parametersNames);
     ISyntaxBuilder AddInsertColumns(string[] columns);

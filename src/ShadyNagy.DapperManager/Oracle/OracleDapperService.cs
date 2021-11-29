@@ -148,13 +148,13 @@ namespace ShadyNagy.DapperManager.Oracle
       }
     }
 
-    public async Task<int> UpdateAsync(string tableFullName, object toUpdate)
+    public async Task<int> UpdateAsync(string tableFullName, Dictionary<string, object> keys, object toUpdate)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return await connection.ExecuteAsync(_oracleSyntaxBuilder.Update(tableFullName, toUpdate).Build(), commandType: CommandType.Text);
+        return await connection.ExecuteAsync(_oracleSyntaxBuilder.Update(tableFullName, keys, toUpdate).Build(), commandType: CommandType.Text);
       }
       catch (Exception exception)
       {
@@ -163,13 +163,13 @@ namespace ShadyNagy.DapperManager.Oracle
       }
     }
 
-    public async Task<int> UpdateSafeAsync(string tableFullName, object toUpdate, Dictionary<string, string> mapper)
+    public async Task<int> UpdateSafeAsync(string tableFullName, object toUpdate, Dictionary<string, string> keys, Dictionary<string, string> mapper)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return await connection.ExecuteAsync(_oracleSyntaxBuilder.UpdateSafe(tableFullName, toUpdate, mapper).Build(), toUpdate);
+        return await connection.ExecuteAsync(_oracleSyntaxBuilder.UpdateSafe(tableFullName, toUpdate, keys, mapper).Build(), toUpdate);
       }
       catch (Exception exception)
       {
@@ -178,13 +178,13 @@ namespace ShadyNagy.DapperManager.Oracle
       }
     }
 
-    public int Update(string tableFullName, object toUpdate)
+    public int Update(string tableFullName, Dictionary<string, object> keys, object toUpdate)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return connection.Execute(_oracleSyntaxBuilder.Update(tableFullName, toUpdate).Build(), commandType: CommandType.Text);
+        return connection.Execute(_oracleSyntaxBuilder.Update(tableFullName, keys, toUpdate).Build(), commandType: CommandType.Text);
       }
       catch (Exception exception)
       {
@@ -193,13 +193,13 @@ namespace ShadyNagy.DapperManager.Oracle
       }
     }
 
-    public int UpdateSafe(string tableFullName, object toInsert, Dictionary<string, string> mapper)
+    public int UpdateSafe(string tableFullName, object toInsert, Dictionary<string, string> keys, Dictionary<string, string> mapper)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return connection.Execute(_oracleSyntaxBuilder.UpdateSafe(tableFullName, toInsert, mapper).Build(), toInsert);
+        return connection.Execute(_oracleSyntaxBuilder.UpdateSafe(tableFullName, toInsert, keys, mapper).Build(), toInsert);
       }
       catch (Exception exception)
       {

@@ -147,13 +147,13 @@ namespace ShadyNagy.DapperManager.Microsoft
         return -1;
       }
     }
-    public async Task<int> UpdateAsync(string tableFullName, object toUpdate)
+    public async Task<int> UpdateAsync(string tableFullName, Dictionary<string, object> keys, object toUpdate)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return await connection.ExecuteAsync(_microsoftSyntaxBuilder.Update(tableFullName, toUpdate).Build(), commandType: CommandType.Text);
+        return await connection.ExecuteAsync(_microsoftSyntaxBuilder.Update(tableFullName, keys, toUpdate).Build(), commandType: CommandType.Text);
       }
       catch (Exception exception)
       {
@@ -162,13 +162,13 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public async Task<int> UpdateSafeAsync(string tableFullName, object toUpdate, Dictionary<string, string> mapper)
+    public async Task<int> UpdateSafeAsync(string tableFullName, object toUpdate, Dictionary<string, string> keys, Dictionary<string, string> mapper)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return await connection.ExecuteAsync(_microsoftSyntaxBuilder.UpdateSafe(tableFullName, toUpdate, mapper).Build(), toUpdate);
+        return await connection.ExecuteAsync(_microsoftSyntaxBuilder.UpdateSafe(tableFullName, toUpdate, keys, mapper).Build(), toUpdate);
       }
       catch (Exception exception)
       {
@@ -177,13 +177,13 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public int Update(string tableFullName, object toUpdate)
+    public int Update(string tableFullName, Dictionary<string, object> keys, object toUpdate)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return connection.Execute(_microsoftSyntaxBuilder.Update(tableFullName, toUpdate).Build(), commandType: CommandType.Text);
+        return connection.Execute(_microsoftSyntaxBuilder.Update(tableFullName, keys, toUpdate).Build(), commandType: CommandType.Text);
       }
       catch (Exception exception)
       {
@@ -192,13 +192,13 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public int UpdateSafe(string tableFullName, object toInsert, Dictionary<string, string> mapper)
+    public int UpdateSafe(string tableFullName, object toInsert, Dictionary<string, string> keys, Dictionary<string, string> mapper)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return connection.Execute(_microsoftSyntaxBuilder.UpdateSafe(tableFullName, toInsert, mapper).Build(), toInsert);
+        return connection.Execute(_microsoftSyntaxBuilder.UpdateSafe(tableFullName, toInsert, keys, mapper).Build(), toInsert);
       }
       catch (Exception exception)
       {

@@ -15,6 +15,8 @@ namespace ShadyNagy.DapperManager.Microsoft
     private const string INSERT = "INSERT INTO";
     private const string UPDATE = "UPDATE";
     private const string SET = "SET";
+    private const string WHERE = "WHERE";
+    private const string AND = "AND";
 
     public StringBuilder Syntax { get; private set; } = new StringBuilder();
 
@@ -52,7 +54,7 @@ namespace ShadyNagy.DapperManager.Microsoft
       return this;
     }
 
-    public ISyntaxBuilder Update(string tableFullName, object obj)
+    public ISyntaxBuilder Update(string tableFullName, Dictionary<string, object> keys, object obj)
     {
       if (obj == null)
       {
@@ -63,7 +65,8 @@ namespace ShadyNagy.DapperManager.Microsoft
       var values = GetPropertiesValues(properties, obj);
       this
         .Update(tableFullName)
-        .Set(properties, values);
+        .Set(properties, values)
+        .Where(keys);
 
       return this;
     }
@@ -95,27 +98,17 @@ namespace ShadyNagy.DapperManager.Microsoft
       return this;
     }
 
-    public ISyntaxBuilder UpdateSafe(string tableFullName, object obj, Dictionary<string, string> mapper = null)
+    public ISyntaxBuilder UpdateSafe(string tableFullName, object obj, Dictionary<string, string> keys, Dictionary<string, string> mapper)
     {
       if (obj == null)
       {
         return this;
       }
 
-      if (mapper == null)
-      {
-        var properties = GetPropertiesNames(obj);
-        var values = GetPropertiesValues(properties, obj);
-        this
-          .Update(tableFullName)
-          .Set(properties, values);
-      }
-      else
-      {
-        this
-          .Update(tableFullName)
-          .SetSafe(mapper.Keys.ToArray(), mapper.Values.ToArray());
-      }
+      this
+        .Update(tableFullName)
+        .SetSafe(mapper.Keys.ToArray(), mapper.Values.ToArray())
+        .WhereSafe(keys);
 
       return this;
     }
@@ -189,6 +182,36 @@ namespace ShadyNagy.DapperManager.Microsoft
         columnsValues.Add($"{columnsNames[i]}=@{parametersNames[i]}");
       }
       Syntax.Append(string.Join(",", columnsValues.ToArray()));
+
+      return this;
+    }
+
+    public ISyntaxBuilder Where(Dictionary<string, object> keys)
+    {
+      Syntax.Append($"{WHERE} ");
+
+      var whereValues = new List<string>();
+      foreach (var key in keys)
+      {
+        whereValues.Add($"{key.Key}={key.Value}");
+
+      }
+      Syntax.Append(string.Join(" AND ", whereValues.ToArray()));
+
+      return this;
+    }
+
+    public ISyntaxBuilder WhereSafe(Dictionary<string, string> keys)
+    {
+      Syntax.Append($"{WHERE} ");
+
+      var whereValues = new List<string>();
+      foreach (var key in keys)
+      {
+        whereValues.Add($"{key.Key}=@{key.Value}");
+        
+      }
+      Syntax.Append(string.Join(" AND ", whereValues.ToArray()));
 
       return this;
     }
