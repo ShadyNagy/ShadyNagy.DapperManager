@@ -50,18 +50,28 @@ namespace ShadyNagy.DapperManager.Oracle
       return this;
     }
 
-    public ISyntaxBuilder InsertSafe(string tableFullName, object obj)
+    public ISyntaxBuilder InsertSafe(string tableFullName, object obj, Dictionary<string, string> mapper = null)
     {
       if (obj == null)
       {
         return this;
       }
 
-      var properties = GetPropertiesNames(obj);
-      this
-        .Insert(tableFullName)
-        .AddInsertColumns(properties)
-        .AddInsertSafeValues(properties);
+      if (mapper == null)
+      {
+        var properties = GetPropertiesNames(obj);
+        this
+          .Insert(tableFullName)
+          .AddInsertColumns(properties)
+          .AddInsertSafeValues(properties);
+      }
+      else
+      {
+        this
+          .Insert(tableFullName)
+          .AddInsertColumns(mapper.Keys.ToArray())
+          .AddInsertSafeValues(mapper.Values.ToArray());
+      }
 
       return this;
     }
