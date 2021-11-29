@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using Oracle.ManagedDataAccess.Client;
+using System.Data.SqlClient;
 using ShadyNagy.Dapper.SharedKernel.Interfaces;
 
 namespace ShadyNagy.DapperManager.Microsoft
@@ -19,7 +19,7 @@ namespace ShadyNagy.DapperManager.Microsoft
     {
       if (_connection == null || _connection.State != ConnectionState.Open)
       {
-        _connection = new OracleConnection(_connectionString);
+        _connection = new SqlConnection(_connectionString);
         _connection.Open();
       }
 
