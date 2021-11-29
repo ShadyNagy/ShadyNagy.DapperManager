@@ -88,7 +88,7 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public async Task<int> InsertAsync<T>(string tableFullName, object toInsert)
+    public async Task<int> InsertAsync(string tableFullName, object toInsert)
     {
       try
       {
@@ -103,7 +103,7 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public async Task<int> InsertSafeAsync<T>(string tableFullName, object toInsert, Dictionary<string , string> mapper)
+    public async Task<int> InsertSafeAsync(string tableFullName, object toInsert, Dictionary<string , string> mapper)
     {
       try
       {
@@ -118,7 +118,7 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public int Insert<T>(string tableFullName, object toInsert)
+    public int Insert(string tableFullName, object toInsert)
     {
       try
       {
@@ -133,7 +133,7 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public int InsertSafe<T>(string tableFullName, object toInsert, Dictionary<string, string> mapper)
+    public int InsertSafe(string tableFullName, object toInsert, Dictionary<string, string> mapper)
     {
       try
       {

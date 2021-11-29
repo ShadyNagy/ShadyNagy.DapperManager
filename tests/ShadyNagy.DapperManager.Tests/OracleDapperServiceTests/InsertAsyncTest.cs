@@ -26,7 +26,7 @@ namespace ShadyNagy.DapperManager.Tests.GetFromAsyncTests
         Name = "Shady"
       };
       var oracleDapperService = _diOracleHelper.GetService<IDapperService>();
-      var affectedRows = await oracleDapperService.InsertAsync<Employee>(tableName, employee);
+      var affectedRows = await oracleDapperService.InsertAsync(tableName, employee);
       affectedRows.ShouldBeGreaterThan(0);
 
       var employees = await oracleDapperService.GetFromAsync<Employee>(tableName);
