@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using ShadyNagy.DapperManager.Interfaces;
+using ShadyNagy.DapperManager.Models;
 
 namespace ShadyNagy.DapperManager.Oracle
 {
@@ -33,6 +34,28 @@ namespace ShadyNagy.DapperManager.Oracle
           .Select()
           .All()
           .From(name);
+
+      return this;
+    }
+    
+    public ISyntaxBuilder SelectByFrom(string tableFullName, Dictionary<string, object> keys)
+    {
+      this
+        .Select()
+        .All()
+        .From(tableFullName)
+        .Where(keys);
+
+      return this;
+    }
+
+    public ISyntaxBuilder SelectByFromSafe(string tableFullName, Dictionary<string, string> keys)
+    {
+      this
+        .Select()
+        .All()
+        .From(tableFullName)
+        .WhereSafe(keys);
 
       return this;
     }

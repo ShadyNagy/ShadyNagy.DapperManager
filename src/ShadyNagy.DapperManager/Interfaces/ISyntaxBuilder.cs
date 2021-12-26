@@ -12,6 +12,8 @@ namespace ShadyNagy.DapperManager.Interfaces
     ISyntaxBuilder All();
     ISyntaxBuilder Select();
     ISyntaxBuilder Select(List<string> columnsNames);
+    ISyntaxBuilder SelectByFrom(string tableFullName, Dictionary<string, object> keys);
+    ISyntaxBuilder SelectByFromSafe(string tableFullName, Dictionary<string, string> keys);
     ISyntaxBuilder From(string name);
     ISyntaxBuilder Insert(string tableFullName, object obj);
     ISyntaxBuilder InsertSafe(string tableFullName, object obj, Dictionary<string, string> mapper);

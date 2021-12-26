@@ -39,6 +39,66 @@ namespace ShadyNagy.DapperManager.Oracle
       }
     }
 
+    public List<T> GetByIdsFrom<T>(string name, Dictionary<string, object> fields)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return (connection.Query<T>(_oracleSyntaxBuilder.SelectByFrom(name, fields).Build(), commandType: CommandType.Text)).ToList();
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return null;
+      }
+    }
+
+    public List<T> GetByIdsFromSafe<T>(string name, Dictionary<string, string> fields)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return (connection.Query<T>(_oracleSyntaxBuilder.SelectByFromSafe(name, fields).Build(), commandType: CommandType.Text)).ToList();
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return null;
+      }
+    }
+
+    public async Task<List<T>> GetByIdsFromAsync<T>(string name, Dictionary<string, object> fields)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return (await connection.QueryAsync<T>(_oracleSyntaxBuilder.SelectByFrom(name, fields).Build(), commandType: CommandType.Text)).ToList();
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return null;
+      }
+    }
+
+    public async Task<List<T>> GetByIdsFromSafeAsync<T>(string name, Dictionary<string, string> fields)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return (await connection.QueryAsync<T>(_oracleSyntaxBuilder.SelectByFromSafe(name, fields).Build(), commandType: CommandType.Text)).ToList();
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return null;
+      }
+    }
+
     public async Task<List<T>> GetColumnsFromAsync<T>(string name, List<string> columnsNames)
     {
       try

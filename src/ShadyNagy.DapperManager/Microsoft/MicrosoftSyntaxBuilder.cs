@@ -37,6 +37,28 @@ namespace ShadyNagy.DapperManager.Microsoft
       return this;
     }
 
+    public ISyntaxBuilder SelectByFrom(string tableFullName, Dictionary<string, object> keys)
+    {
+      this
+        .Select()
+        .All()
+        .From(tableFullName)
+        .Where(keys);
+
+      return this;
+    }
+
+    public ISyntaxBuilder SelectByFromSafe(string tableFullName, Dictionary<string, string> keys)
+    {
+      this
+        .Select()
+        .All()
+        .From(tableFullName)
+        .WhereSafe(keys);
+
+      return this;
+    }
+
     public ISyntaxBuilder Insert(string tableFullName, object obj)
     {
       if (obj == null)
