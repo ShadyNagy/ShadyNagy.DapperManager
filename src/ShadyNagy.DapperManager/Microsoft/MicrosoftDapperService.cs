@@ -99,6 +99,21 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
+    public async Task<List<T>> GetByIdsFromSafeAsync<T>(string name, object databaseFields, object idsObject)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return (await connection.QueryAsync<T>(_microsoftSyntaxBuilder.SelectByFromSafe(name, databaseFields).Build(), idsObject, commandType: CommandType.Text)).ToList();
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return null;
+      }
+    }
+
     public async Task<List<T>> GetColumnsFromAsync<T>(string name, List<string> columnsNames)
     {
       try

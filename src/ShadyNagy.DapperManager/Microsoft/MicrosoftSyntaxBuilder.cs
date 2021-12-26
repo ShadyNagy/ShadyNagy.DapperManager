@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using ShadyNagy.DapperManager.Extensions;
 using ShadyNagy.DapperManager.Interfaces;
+using ShadyNagy.DapperManager.Models;
 
 namespace ShadyNagy.DapperManager.Microsoft
 {
@@ -55,6 +57,17 @@ namespace ShadyNagy.DapperManager.Microsoft
         .All()
         .From(tableFullName)
         .WhereSafe(keys);
+
+      return this;
+    }
+
+    public ISyntaxBuilder SelectByFromSafe(string tableFullName, object databaseFields)
+    {
+      this
+        .Select()
+        .All()
+        .From(tableFullName)
+        .WhereSafe(databaseFields);
 
       return this;
     }
@@ -168,6 +181,26 @@ namespace ShadyNagy.DapperManager.Microsoft
     public ISyntaxBuilder Update(string tableFullName)
     {
       Syntax = new StringBuilder($"{UPDATE} {tableFullName} ");
+
+      return this;
+    }
+
+    public ISyntaxBuilder WhereSafe(object databaseFields)
+    {
+      Syntax.Append($" {WHERE} ");
+
+      var whereValues = new List<string>();
+      var properties = databaseFields.GetPropertiesName();
+      foreach (var property in properties)
+      {
+        var value = databaseFields.GetPropertyValue(property) as DatabaseField;
+        if (value == null)
+        {
+          continue;
+        }
+        whereValues.Add($"{value.FieldName}=@{property}");
+      }
+      Syntax.Append(string.Join($" {AND} ", whereValues.ToArray()));
 
       return this;
     }

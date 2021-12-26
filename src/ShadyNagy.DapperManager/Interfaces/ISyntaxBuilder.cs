@@ -14,12 +14,14 @@ namespace ShadyNagy.DapperManager.Interfaces
     ISyntaxBuilder Select(List<string> columnsNames);
     ISyntaxBuilder SelectByFrom(string tableFullName, Dictionary<string, object> keys);
     ISyntaxBuilder SelectByFromSafe(string tableFullName, Dictionary<string, string> keys);
+    ISyntaxBuilder SelectByFromSafe(string tableFullName, object databaseFields);
     ISyntaxBuilder From(string name);
     ISyntaxBuilder Insert(string tableFullName, object obj);
     ISyntaxBuilder InsertSafe(string tableFullName, object obj, Dictionary<string, string> mapper);
     ISyntaxBuilder Update(string tableFullName);
     ISyntaxBuilder Where(Dictionary<string, object> keys);
     ISyntaxBuilder WhereSafe(Dictionary<string, string> keys);
+    ISyntaxBuilder WhereSafe(object databaseFields);
     ISyntaxBuilder Update(string tableFullName, Dictionary<string, object> keys, object obj);
     ISyntaxBuilder UpdateSafe(string tableFullName, object obj, Dictionary<string, string> keys, Dictionary<string, string> mapper);
     ISyntaxBuilder Set(string[] columnsNames, object[] values);

@@ -7,6 +7,7 @@ using Dapper;
 using Microsoft.Extensions.Logging;
 using ShadyNagy.Dapper.SharedKernel.Interfaces;
 using ShadyNagy.DapperManager.Interfaces;
+using ShadyNagy.DapperManager.Models;
 
 namespace ShadyNagy.DapperManager.Oracle
 {
@@ -91,6 +92,21 @@ namespace ShadyNagy.DapperManager.Oracle
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
         return (await connection.QueryAsync<T>(_oracleSyntaxBuilder.SelectByFromSafe(name, fields).Build(), idsObject, commandType: CommandType.Text)).ToList();
+      }
+      catch (Exception exception)
+      {
+        _logger.LogError(exception.Message);
+        return null;
+      }
+    }
+
+    public async Task<List<T>> GetByIdsFromSafeAsync<T>(string name, object databaseFields, object idsObject)
+    {
+      try
+      {
+        var connection = _sqlConnectionFactory.GetOpenConnection();
+
+        return (await connection.QueryAsync<T>(_oracleSyntaxBuilder.SelectByFromSafe(name, databaseFields).Build(), idsObject, commandType: CommandType.Text)).ToList();
       }
       catch (Exception exception)
       {
