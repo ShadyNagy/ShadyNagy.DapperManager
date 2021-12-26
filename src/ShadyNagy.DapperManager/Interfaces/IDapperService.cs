@@ -12,7 +12,7 @@ namespace ShadyNagy.DapperManager.Interfaces
     List<T> GetByIdsFrom<T>(string name, Dictionary<string, object> fields);
     List<T> GetByIdsFromSafe<T>(string name, Dictionary<string, string> fields, object idsObject);
     Task<List<T>> GetByIdsFromAsync<T>(string name, Dictionary<string, object> fields);
-    Task<List<T>> GetByIdsFromSafeAsync<T>(string name, Dictionary<string, string> fields);
+    Task<List<T>> GetByIdsFromSafeAsync<T>(string name, Dictionary<string, string> fields, object idsObject);
     List<T> GetColumnsFrom<T>(string name, List<string> columnsNames);
     Task<int> InsertAsync(string tableFullName, object toInsert);
     Task<int> InsertSafeAsync(string tableFullName, object toInsert, Dictionary<string, string> mapper);
