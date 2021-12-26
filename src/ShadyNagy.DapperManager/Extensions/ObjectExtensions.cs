@@ -178,7 +178,7 @@ namespace ShadyNagy.DapperManager.Extensions
       return null;
     }
 
-    public static DynamicParameters ToDynamicParameters(this object databaseFields)
+    public static DynamicParameters ToDynamicParameters(this object databaseFields, bool isRemoveNull=true)
     {
       var properties = databaseFields.GetPropertiesName();
       var parameters = new DynamicParameters();
@@ -187,6 +187,12 @@ namespace ShadyNagy.DapperManager.Extensions
         var value = databaseFields.GetPropertyValue(property) as DatabaseField;
         if (value == null)
         {
+          continue;
+        }
+
+        if (value.Value == null && isRemoveNull)
+        {
+          databaseFields = null;
           continue;
         }
         if (value.Value == null || value.Value.ToString() == "null")

@@ -101,12 +101,12 @@ namespace ShadyNagy.DapperManager.Oracle
       }
     }
 
-    public async Task<List<T>> GetByIdsFromSafeAsync<T>(string name, object databaseFields)
+    public async Task<List<T>> GetByIdsFromSafeAsync<T>(string name, object databaseFields, bool isRemoveNull=true)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
-        var parameters = databaseFields.ToDynamicParameters();
+        var parameters = databaseFields.ToDynamicParameters(isRemoveNull);
 
         return (await connection.QueryAsync<T>(_oracleSyntaxBuilder.SelectByFromSafe(name, databaseFields).Build(), parameters, commandType: CommandType.Text)).ToList();
       }
