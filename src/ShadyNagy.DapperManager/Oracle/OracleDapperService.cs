@@ -101,7 +101,7 @@ namespace ShadyNagy.DapperManager.Oracle
       }
     }
 
-    public async Task<List<T>> GetByIdsFromSafeAsync<T>(string name, object databaseFields, bool isRemoveNull=true)
+    public async Task<List<T>> GetByFilterFromSafeAsync<T>(string name, object databaseFields, bool isRemoveNull=true)
     {
       try
       {

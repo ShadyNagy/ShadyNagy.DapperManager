@@ -192,7 +192,7 @@ namespace ShadyNagy.DapperManager.Extensions
 
         if (value.Value == null && isRemoveNull)
         {
-          databaseFields = null;
+          databaseFields.SetPropertyValueByName(property, null);
           continue;
         }
         if (value.Value == null || value.Value.ToString() == "null")
@@ -201,7 +201,7 @@ namespace ShadyNagy.DapperManager.Extensions
         }
         else
         {
-          parameters.Add($"@{property}", value);
+          parameters.Add($"@{property}", value.Value);
         }
       }
 
