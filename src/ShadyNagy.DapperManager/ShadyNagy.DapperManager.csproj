@@ -13,7 +13,7 @@
     <RepositoryUrl>https://github.com/ShadyNagy/ShadyNagy.DapperManager</RepositoryUrl>
     <PackageTags>dapper extension method methods c# .net dotnet helpers test tests manager</PackageTags>
     <PackageReleaseNotes>Insert added.</PackageReleaseNotes>
-    <Version>0.1.20</Version>
+    <Version>0.1.21</Version>
     <AssemblyName>ShadyNagy.DapperManager</AssemblyName>
     <PackageIconUrl>https://user-images.githubusercontent.com/6225593/138565536-345b379c-f8a9-4fb8-8156-64625330ca2c.png</PackageIconUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

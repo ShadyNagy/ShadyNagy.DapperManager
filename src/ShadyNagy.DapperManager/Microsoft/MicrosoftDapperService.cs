@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Logging;
 using ShadyNagy.Dapper.SharedKernel.Interfaces;
+using ShadyNagy.DapperManager.Extensions;
 using ShadyNagy.DapperManager.Interfaces;
+using ShadyNagy.DapperManager.Models;
 
 namespace ShadyNagy.DapperManager.Microsoft
 {
@@ -99,13 +101,14 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public async Task<List<T>> GetByIdsFromSafeAsync<T>(string name, object databaseFields, object idsObject)
+    public async Task<List<T>> GetByIdsFromSafeAsync<T>(string name, object databaseFields)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
+        var parameters = databaseFields.ToDynamicParameters();
 
-        return (await connection.QueryAsync<T>(_microsoftSyntaxBuilder.SelectByFromSafe(name, databaseFields).Build(), idsObject, commandType: CommandType.Text)).ToList();
+        return (await connection.QueryAsync<T>(_microsoftSyntaxBuilder.SelectByFromSafe(name, databaseFields).Build(), parameters, commandType: CommandType.Text)).ToList();
       }
       catch (Exception exception)
       {

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using Dapper;
+using ShadyNagy.DapperManager.Models;
 
 namespace ShadyNagy.DapperManager.Extensions
 {
@@ -174,6 +176,30 @@ namespace ShadyNagy.DapperManager.Extensions
       }
 
       return null;
+    }
+
+    public static DynamicParameters ToDynamicParameters(this object databaseFields)
+    {
+      var properties = databaseFields.GetPropertiesName();
+      var parameters = new DynamicParameters();
+      foreach (var property in properties)
+      {
+        var value = databaseFields.GetPropertyValue(property) as DatabaseField;
+        if (value == null)
+        {
+          continue;
+        }
+        if (value.Value == null || value.Value.ToString() == "null")
+        {
+          parameters.Add($"@{property}");
+        }
+        else
+        {
+          parameters.Add($"@{property}", value);
+        }
+      }
+
+      return parameters;
     }
   }
 }
