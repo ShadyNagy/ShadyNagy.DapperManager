@@ -10,8 +10,7 @@ namespace ShadyNagy.DapperManager.Interfaces
     Task<List<T>> GetColumnsFromAsync<T>(string name, List<string> columnsNames);
     List<T> GetFrom<T>(string name);
     List<T> GetByIdsFrom<T>(string name, Dictionary<string, object> fields);
-    List<T> GetByIdsFromSafe<T>(string name, Dictionary<string, string> fields);
-
+    List<T> GetByIdsFromSafe<T>(string name, Dictionary<string, string> fields, object idsObject);
     Task<List<T>> GetByIdsFromAsync<T>(string name, Dictionary<string, object> fields);
     Task<List<T>> GetByIdsFromSafeAsync<T>(string name, Dictionary<string, string> fields);
     List<T> GetColumnsFrom<T>(string name, List<string> columnsNames);

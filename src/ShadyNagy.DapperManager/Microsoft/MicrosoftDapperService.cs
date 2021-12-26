@@ -54,13 +54,13 @@ namespace ShadyNagy.DapperManager.Microsoft
       }
     }
 
-    public List<T> GetByIdsFromSafe<T>(string name, Dictionary<string, string> fields)
+    public List<T> GetByIdsFromSafe<T>(string name, Dictionary<string, string> fields, object idsObject)
     {
       try
       {
         var connection = _sqlConnectionFactory.GetOpenConnection();
 
-        return (connection.Query<T>(_microsoftSyntaxBuilder.SelectByFromSafe(name, fields).Build(), commandType: CommandType.Text)).ToList();
+        return (connection.Query<T>(_microsoftSyntaxBuilder.SelectByFromSafe(name, fields).Build(), idsObject, commandType: CommandType.Text)).ToList();
       }
       catch (Exception exception)
       {
