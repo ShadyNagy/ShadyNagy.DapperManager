@@ -193,7 +193,7 @@ namespace ShadyNagy.DapperManager.Microsoft
       var properties = databaseFields.GetPropertiesName();
       foreach (var property in properties)
       {
-        var value = databaseFields.GetPropertyValue(property) as DatabaseField;
+        var value = databaseFields.GetPropertyValue(property) as DatabaseMapField;
         if (value == null)
         {
           continue;

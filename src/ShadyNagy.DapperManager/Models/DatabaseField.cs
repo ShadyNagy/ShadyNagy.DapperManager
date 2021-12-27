@@ -1,13 +1,13 @@
 ﻿namespace ShadyNagy.DapperManager.Models
 {
-  public class DatabaseField
+  public class DatabaseMapField
   {
     public DatabaseFieldDirection DatabaseFieldDirection { get; set; }
     public DatabaseFieldType DatabaseFieldType { get; set; }
     public string FieldName { get; set; }
     public object Value { get; set; }
 
-    public DatabaseField(DatabaseFieldDirection databaseFieldDirection, string fieldName, DatabaseFieldType databaseFieldType, object value)
+    public DatabaseMapField(DatabaseFieldDirection databaseFieldDirection, string fieldName, DatabaseFieldType databaseFieldType, object value)
     {
       DatabaseFieldDirection = databaseFieldDirection;
       DatabaseFieldType = databaseFieldType;
@@ -15,7 +15,7 @@
       Value = value;
     }
 
-    public DatabaseField(string fieldName, object value)
+    public DatabaseMapField(string fieldName, object value)
     {
       FieldName = fieldName;
       Value = value;

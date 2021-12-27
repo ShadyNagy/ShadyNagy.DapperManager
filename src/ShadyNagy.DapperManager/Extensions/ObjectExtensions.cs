@@ -184,7 +184,7 @@ namespace ShadyNagy.DapperManager.Extensions
       var parameters = new DynamicParameters();
       foreach (var property in properties)
       {
-        var value = databaseFields.GetPropertyValue(property) as DatabaseField;
+        var value = databaseFields.GetPropertyValue(property) as DatabaseMapField;
         if (value == null)
         {
           continue;
