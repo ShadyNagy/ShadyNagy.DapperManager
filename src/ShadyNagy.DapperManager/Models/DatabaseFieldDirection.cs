@@ -1,6 +1,6 @@
 ﻿namespace ShadyNagy.DapperManager.Models
 {
-  public enum DatabaseFieldDirection
+  public enum DatabaseMapFieldDirection
   {
     In,
     Out,

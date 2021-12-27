@@ -2,12 +2,12 @@
 {
   public class DatabaseMapField
   {
-    public DatabaseFieldDirection DatabaseFieldDirection { get; set; }
-    public DatabaseFieldType DatabaseFieldType { get; set; }
+    public DatabaseMapFieldDirection DatabaseFieldDirection { get; set; }
+    public DatabaseMapFieldType DatabaseFieldType { get; set; }
     public string FieldName { get; set; }
     public object Value { get; set; }
 
-    public DatabaseMapField(DatabaseFieldDirection databaseFieldDirection, string fieldName, DatabaseFieldType databaseFieldType, object value)
+    public DatabaseMapField(DatabaseMapFieldDirection databaseFieldDirection, string fieldName, DatabaseMapFieldType databaseFieldType, object value)
     {
       DatabaseFieldDirection = databaseFieldDirection;
       DatabaseFieldType = databaseFieldType;

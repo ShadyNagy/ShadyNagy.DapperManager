@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ShadyNagy.DapperManager.Models
+﻿namespace ShadyNagy.DapperManager.Models
 {
-  public enum DatabaseFieldType
+  public enum DatabaseMapFieldType
   {
     BFile = 101, // 0x00000065
     Blob = 102, // 0x00000066
