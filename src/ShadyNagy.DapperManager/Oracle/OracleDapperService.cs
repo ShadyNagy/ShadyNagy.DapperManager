@@ -108,7 +108,7 @@ namespace ShadyNagy.DapperManager.Oracle
         var connection = _sqlConnectionFactory.GetOpenConnection();
         var parameters = databaseFields.ToDynamicParameters(isRemoveNull);
 
-        return (await connection.QueryAsync<T>(_oracleSyntaxBuilder.SelectByFromSafe(name, databaseFields).Build(), parameters, commandType: CommandType.Text)).ToList();
+        return (await connection.QueryAsync<T>(_oracleSyntaxBuilder.SelectByFromSafe(name, databaseFields).Build(), parameters)).ToList();
       }
       catch (Exception exception)
       {

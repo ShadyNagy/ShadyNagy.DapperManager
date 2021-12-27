@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ShadyNagy.DapperInMemory.Oracle;
 using ShadyNagy.DapperManager.Extensions;
+using ShadyNagy.DapperManager.Oracle;
 using ShadyNagy.DapperManager.Tests.Constants;
 
 namespace ShadyNagy.DapperManager.Tests.Helpers

@@ -197,11 +197,11 @@ namespace ShadyNagy.DapperManager.Extensions
         }
         if (value.Value == null || value.Value.ToString() == "null")
         {
-          parameters.Add($"@{property}");
+          parameters.Add($":{property}");
         }
         else
         {
-          parameters.Add($"@{property}", value.Value);
+          parameters.Add($":{property}", value.Value);
         }
       }
 

@@ -228,7 +228,7 @@ namespace ShadyNagy.DapperManager.Oracle
         {
           continue;
         }
-        whereValues.Add($"{value.FieldName}=@{property}");
+        whereValues.Add($"{value.FieldName}=:{property}");
       }
       Syntax.Append(string.Join($" {AND} ", whereValues.ToArray()));
 
