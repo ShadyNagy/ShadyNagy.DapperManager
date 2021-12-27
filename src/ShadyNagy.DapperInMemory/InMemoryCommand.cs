@@ -68,11 +68,11 @@ namespace ShadyNagy.DapperInMemory
         }
         else if (GetSqlCommandType() == SqlSyntaxType.Insert)
         {
-          return ExcuteInsert();
+          return ExecuteInsert();
         }
         else if (GetSqlCommandType() == SqlSyntaxType.CreateTable)
         {
-          return ExcuteCreateTable();
+          return ExecuteCreateTable();
         }
       }
 
@@ -89,7 +89,7 @@ namespace ShadyNagy.DapperInMemory
         }
         else if (GetSqlCommandType() == SqlSyntaxType.Select)
         {
-          return ExcuteSelect();
+          return ExecuteSelect();
         }
       }
       return null;
@@ -305,7 +305,7 @@ namespace ShadyNagy.DapperInMemory
       return finalString;
     }
 
-    private IDataReader? ExcuteSelect()
+    private IDataReader? ExecuteSelect()
     {
       var tableName = GetSelectTableName();
 
@@ -331,7 +331,7 @@ namespace ShadyNagy.DapperInMemory
       return table.CreateDataReader();
     }
 
-    private int ExcuteInsert()
+    private int ExecuteInsert()
     {
       var addedRows = 0;
       var tableName = GetInsertTableName();
@@ -364,7 +364,7 @@ namespace ShadyNagy.DapperInMemory
       return addedRows;
     }
 
-    private int ExcuteCreateTable()
+    private int ExecuteCreateTable()
     {
       var affectedCount = 0;
       var tableName = GetCreateTableName();
