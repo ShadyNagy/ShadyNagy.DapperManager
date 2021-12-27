@@ -198,7 +198,17 @@ namespace ShadyNagy.DapperManager.Microsoft
         {
           continue;
         }
-        whereValues.Add($"{value.FieldName}=@{property}");
+
+        var valueType = value.GetPropertyType("Value");
+        if (valueType.IsGenericType && (valueType.GetGenericTypeDefinition() == typeof(List<>) || valueType.IsArray))
+        {
+          whereValues.Add($"{value.FieldName} IN @{property}");
+        }
+        else
+        {
+          whereValues.Add($"{value.FieldName}=@{property}");
+        }
+        
       }
       Syntax.Append(string.Join($" {AND} ", whereValues.ToArray()));
 
