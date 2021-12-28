@@ -200,7 +200,7 @@ namespace ShadyNagy.DapperManager.Microsoft
         }
 
         var valueType = value.GetPropertyType("Value");
-        if (valueType.IsGenericType && (valueType.GetGenericTypeDefinition() == typeof(List<>) || valueType.IsArray))
+        if ((valueType.IsGenericType && valueType.GetGenericTypeDefinition() == typeof(List<>)) || valueType.IsArray)
         {
           whereValues.Add($"{value.FieldName} IN @{property}");
         }
